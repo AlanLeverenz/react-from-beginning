@@ -37,4 +37,5 @@ const data = [
   },
 ];
 
-ReactDOM.render(WHAT, WHERE);
+// ReactDOM.render(WHAT, WHERE);
+ReactDOM.render(<CatNav data={data} />, document.getElementById('root'));
