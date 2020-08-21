@@ -1,10 +1,11 @@
+// A Presentational or Stateless component - insert props
 // function Card(props) {
 //   return(
 //     <h1>Sanity Check</h1>
 //   )
 // }
 
-// Class component
+// Class component - use 'this' for passing props
 class Card extends React.Component {
   constructor() {
     super();
