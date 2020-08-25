@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import StateInAction from './StateInAction';
 
 // function App() {
 //   return <h1>Sanity Check</h1>;
@@ -8,7 +8,12 @@ import './App.css';
 
 class App extends Component {
   render() {
-    return <h1>Sanity Check</h1>;
+    return (
+      <div className='App'>
+        <h1>State Check</h1>
+        <StateInAction />
+      </div>
+    );
   }
 }
 
