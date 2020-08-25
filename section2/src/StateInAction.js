@@ -14,7 +14,11 @@ class StateInAction extends Component {
   }
 
   render() {
-    return <h1>{this.state.text}</h1>;
+    return (
+      <h1>
+        {this.state.text} - {this.props.name}
+      </h1>
+    );
   }
 }
 

@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>State Check</h1>
-        <StateInAction />
+        <StateInAction name='Rob' />
       </div>
     );
   }
