@@ -25,7 +25,7 @@ class CardSet extends Component {
     console.log(this.state.chosenCards);
 
     const savedCards = this.state.chosenCards.map((card, i) => {
-      return <h3 key={i}>{card.course}</h3>;
+      return <Card key={i} card={card} />;
     });
 
     const cardList = this.props.cards.map((card, i) => {
