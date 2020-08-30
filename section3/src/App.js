@@ -4,6 +4,9 @@ import axios from 'axios';
 
 function App() {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=London&units=imperial&appid=7d4f2cda5bab002442683b32490d0c00`;
+  axios.get(url).then((res) => {
+    console.log(res);
+  });
 
   return (
     <div className='App'>
