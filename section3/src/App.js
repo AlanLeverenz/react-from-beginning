@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-// import dotenv from 'dotenv';
-// 7d4f2cda5bab002442683b32490d0c00`;
-// fc675bd9b8d62b7af66e3d118b418449
-// require(dotenv).config();
-// const keys = dotenv.config();
-const API_KEY = '7d4f2cda5bab002442683b32490d0c00';
+import keys from './mykeys';
+
+const API_KEY = keys.ids.owm_key;
 
 class App extends Component {
   constructor() {
