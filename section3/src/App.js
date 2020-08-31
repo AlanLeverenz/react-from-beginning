@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+// import dotenv from 'dotenv';
+// 7d4f2cda5bab002442683b32490d0c00`;
+// fc675bd9b8d62b7af66e3d118b418449
+// require(dotenv).config();
+// const keys = dotenv.config();
+const API_KEY = '7d4f2cda5bab002442683b32490d0c00';
 
 class App extends Component {
   constructor() {
@@ -10,10 +16,8 @@ class App extends Component {
     };
   }
 
-  // 7d4f2cda5bab002442683b32490d0c00`;
-  // fc675bd9b8d62b7af66e3d118b418449
   componentDidMount() {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=London&units=imperial&appid=7d4f2cda5bab002442683b32490d0c00`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=London&units=imperial&appid=${API_KEY}`;
     axios.get(url).then((res) => {
       console.log(res);
       this.setState({
