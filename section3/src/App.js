@@ -10,6 +10,11 @@ class App extends Component {
     super();
     this.state = {
       temp: '',
+      cityName: '',
+      weather: '',
+      high: '',
+      low: '',
+      icon: '',
     };
   }
 
@@ -19,6 +24,11 @@ class App extends Component {
       console.log(res);
       this.setState({
         temp: res.data.main.temp,
+        high: res.data.main.temp_max,
+        low: res.data.main.temp_min,
+        weather: res.data.weather[0].description,
+        icon: res.data.weather[0].icon,
+        cityName: res.data.name,
       });
     });
     const elems = document.querySelectorAll('.modal');
@@ -26,6 +36,8 @@ class App extends Component {
   }
 
   render() {
+    const iconUrl = `http://openweathermap.org/img/w/${this.state.icon}.png`;
+
     return (
       <div className='App'>
         <h1>{this.state.temp}</h1>
@@ -34,21 +46,26 @@ class App extends Component {
           className='waves-effect waves-light btn modal-trigger'
           href='#modal1'
         >
-          Modal
+          Details
         </a>
 
         {/* <!-- Modal Structure --> */}
         <div id='modal1' className='modal'>
           <div className='modal-content'>
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+            <h4>{this.state.cityName}</h4>
+            <p>
+              High: {this.state.high} - Low: {this.state.low}
+            </p>
+            <p>
+              {this.state.weather} <img src={iconUrl} alt='icon' />
+            </p>
           </div>
           <div className='modal-footer'>
             <a
               href='#!'
               className='modal-close waves-effect waves-green btn-flat'
             >
-              Agree
+              OK
             </a>
           </div>
         </div>
