@@ -34,20 +34,46 @@ class App extends Component {
     const elems = document.querySelectorAll('.modal');
     const instances = window.M.Modal.init(elems);
   }
+  searchCity = (e) => {
+    e.preventDefault();
+    const city = document.getElementById('city').value;
+    console.log(city);
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
+    axios.get(url).then((res) => {
+      console.log(res);
+      this.setState({
+        temp: res.data.main.temp,
+        high: res.data.main.temp_max,
+        low: res.data.main.temp_min,
+        weather: res.data.weather[0].description,
+        icon: res.data.weather[0].icon,
+        cityName: res.data.name,
+      });
+    });
+  };
 
   render() {
     const iconUrl = `http://openweathermap.org/img/w/${this.state.icon}.png`;
 
     return (
       <div className='App'>
-        <h1>{this.state.temp}</h1>
-        {/* <!-- Modal Trigger --> */}
-        <a
-          className='waves-effect waves-light btn modal-trigger'
-          href='#modal1'
-        >
-          Details
-        </a>
+        <div className='row'>
+          <div className='col s6 offset-s3'>
+            <h1>{this.state.temp}</h1>
+            {/* <!-- Modal Trigger --> */}
+            <a
+              className='waves-effect waves-light btn modal-trigger'
+              href='#modal1'
+            >
+              Details
+            </a>
+
+            {/* <!-- Input Box --> */}
+            <form onSubmit={this.searchCity}>
+              <input type='text' id='city' placeholder='Enter a City Name' />
+            </form>
+          </div>
+        </div>
 
         {/* <!-- Modal Structure --> */}
         <div id='modal1' className='modal'>
@@ -65,7 +91,7 @@ class App extends Component {
               href='#!'
               className='modal-close waves-effect waves-green btn-flat'
             >
-              OK
+              Close
             </a>
           </div>
         </div>
