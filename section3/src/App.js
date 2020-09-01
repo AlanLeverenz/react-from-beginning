@@ -15,29 +15,36 @@ class App extends Component {
       high: '',
       low: '',
       icon: '',
+      isRaining: '',
     };
   }
 
   componentDidMount() {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=London&units=imperial&appid=${API_KEY}`;
-    axios.get(url).then((res) => {
-      console.log(res);
-      this.setState({
-        temp: res.data.main.temp,
-        high: res.data.main.temp_max,
-        low: res.data.main.temp_min,
-        weather: res.data.weather[0].description,
-        icon: res.data.weather[0].icon,
-        cityName: res.data.name,
-      });
-    });
+    this.getCityWeather('London');
     const elems = document.querySelectorAll('.modal');
     const instances = window.M.Modal.init(elems);
   }
+
+  // compare to prevState to avoid overunning the render stack limit
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.weather !== prevState.weather) {
+      const isRaining = this.state.weather.includes('rain');
+      if (isRaining) {
+        this.setState({
+          isRaining: 'Rain rain go away!!!',
+        });
+      }
+    }
+  }
+
+  // Search function using form submit. arrow function doesn't need binding.
   searchCity = (e) => {
     e.preventDefault();
     const city = document.getElementById('city').value;
-    console.log(city);
+    this.getCityWeather(city);
+  };
+
+  getCityWeather = (city) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${API_KEY}`;
     axios.get(url).then((res) => {
       console.log(res);
@@ -60,6 +67,7 @@ class App extends Component {
         <div className='row'>
           <div className='col s6 offset-s3'>
             <h1>{this.state.temp}</h1>
+            <h1>{this.state.isRaining}</h1>
             {/* <!-- Modal Trigger --> */}
             <a
               className='waves-effect waves-light btn modal-trigger'
