@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import keys from './mykeys';
+import Headers from './Headers';
+import Modal from './Modal';
 
 const API_KEY = keys.ids.owm_key;
 
@@ -16,6 +18,7 @@ class App extends Component {
       low: '',
       icon: '',
       isRaining: '',
+      showModal: true,
     };
   }
 
@@ -59,6 +62,12 @@ class App extends Component {
     });
   };
 
+  removeModal = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
   render() {
     const iconUrl = `http://openweathermap.org/img/w/${this.state.icon}.png`;
 
@@ -66,43 +75,33 @@ class App extends Component {
       <div className='App'>
         <div className='row'>
           <div className='col s6 offset-s3'>
-            <h1>{this.state.temp}</h1>
-            <h1>{this.state.isRaining}</h1>
-            {/* <!-- Modal Trigger --> */}
+            <button onClick={this.removeModal} className='btn'>
+              Remove from DOM!!
+            </button>
+            <Headers temp={this.state.temp} isRaining={this.state.isRaining} />
             <a
               className='waves-effect waves-light btn modal-trigger'
               href='#modal1'
             >
               Details
             </a>
-
-            {/* <!-- Input Box --> */}
             <form onSubmit={this.searchCity}>
               <input type='text' id='city' placeholder='Enter a City Name' />
             </form>
           </div>
         </div>
 
-        {/* <!-- Modal Structure --> */}
-        <div id='modal1' className='modal'>
-          <div className='modal-content'>
-            <h4>{this.state.cityName}</h4>
-            <p>
-              High: {this.state.high} - Low: {this.state.low}
-            </p>
-            <p>
-              {this.state.weather} <img src={iconUrl} alt='icon' />
-            </p>
-          </div>
-          <div className='modal-footer'>
-            <a
-              href='#!'
-              className='modal-close waves-effect waves-green btn-flat'
-            >
-              Close
-            </a>
-          </div>
-        </div>
+        {this.state.showModal ? (
+          <Modal
+            iconUrl={iconUrl}
+            weather={this.state.weather}
+            cityName={this.state.cityName}
+            low={this.state.low}
+            high={this.state.high}
+          />
+        ) : (
+          ''
+        )}
       </div>
     );
   }
