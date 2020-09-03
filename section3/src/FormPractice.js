@@ -8,12 +8,13 @@ class FormPractice extends Component {
     };
   }
 
-  // a controlled form (handled by React)
+  // a controlled form using state values (handled by React)
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted...');
     const name = document.getElementById('name').value;
     console.log(name);
+    console.log(this.state.name);
   };
 
   // updates the state using onChange handler
