@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import FormPractice from './FormPractice';
+import Calculator from './temperatureApp/Calculator';
 
 // ReactDOM.render(
 //   <React.StrictMode>
@@ -12,9 +13,16 @@ import FormPractice from './FormPractice';
 //   document.getElementById('root')
 // );
 
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <FormPractice />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
 ReactDOM.render(
   <React.StrictMode>
-    <FormPractice />
+    <Calculator />
   </React.StrictMode>,
   document.getElementById('root')
 );
