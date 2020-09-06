@@ -19,13 +19,14 @@ class Calculator extends Component {
     let fTemp;
     let cTemp;
     if (scale === 'C') {
-      //  convert celcius to f
+      //  convert celcius to fahrenheit
       fTemp = Math.round((temperature * 9) / 5 + 32);
       // don't need to convert celsius
       cTemp = temperature;
     } else if (scale === 'F') {
       // convert f to celcius
       cTemp = Math.round(((temperature - 32) * 5) / 9);
+      // don't need to convert to fahrenheit
       fTemp = temperature;
     }
 
