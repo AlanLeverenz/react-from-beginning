@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import QuizBar from './components/QuizBar';
 
 class App extends React.Component {
   constructor() {
@@ -9,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <h1>Sanity Check</h1>
+        <QuizBar />
       </div>
     );
   }
