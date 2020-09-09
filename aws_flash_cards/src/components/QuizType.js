@@ -17,7 +17,8 @@ function QuizType(props) {
   return (
     <li className='col-sm-3 text-center'>
       <div className='nav-card'>
-        <FontAwesomeIcon icon='dice' size='4x' />
+        <FontAwesomeIcon icon={props.icon} size='4x' />
+        <span>{props.quizType}</span>
       </div>
     </li>
   );
