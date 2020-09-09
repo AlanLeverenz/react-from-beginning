@@ -11,10 +11,18 @@ function QuizBar(props) {
     <div className='quiz-bar'>
       <h1>Choose your study type</h1>
       <ul className='nav nav-pills nav-fill'>
-        <QuizType icon='dice' quizType='Random' />
-        <QuizType icon='file-alt' quizType='Regular' />
-        <QuizType icon='dumbbell' quizType='Weighted' />
-        <QuizType icon='font' quizType='Multi' />
+        <QuizType icon='dice' quizType='Random' userChoice={props.userChoice} />
+        <QuizType
+          icon='file-alt'
+          quizType='Regular'
+          userChoice={props.userChoice}
+        />
+        <QuizType
+          icon='dumbbell'
+          quizType='Weighted'
+          userChoice={props.userChoice}
+        />
+        <QuizType icon='font' quizType='Multi' userChoice={props.userChoice} />
       </ul>
     </div>
   );
