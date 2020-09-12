@@ -23,7 +23,7 @@ class App extends React.Component {
       <div className='App align-items-center d-flex'>
         <div className='container'>
           <QuizBar userChoice={this.userChoice} />
-          <FlashCard />
+          <FlashCard cardStyle={this.state.cardStyle} />
         </div>
       </div>
     );
