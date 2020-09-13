@@ -3,6 +3,11 @@ import MultiCard from './MultiCard';
 import RegularCard from './RegularCard';
 import RandomWeighted from './RandomWeighted';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faSpinner);
 
 class FlashCard extends Component {
   constructor() {
@@ -11,11 +16,12 @@ class FlashCard extends Component {
     this.state = {
       flipClass: '',
       questionData: '',
+      ready: false,
     };
   }
 
   componentDidMount() {
-    this.newCard();
+    // this.newCard();
   }
 
   // setState when flashcard is clicked
@@ -43,11 +49,21 @@ class FlashCard extends Component {
       // console.log(response.data);
       this.setState({
         questionData: response.data,
+        ready: true,
       });
     });
   };
 
   render() {
+    if (!this.state.ready) {
+      this.newCard();
+      return (
+        <div className='spinner-wrapper'>
+          <FontAwesomeIcon icon='spinner' size='6x' spin />
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className='row align-items-center card-holder'>
