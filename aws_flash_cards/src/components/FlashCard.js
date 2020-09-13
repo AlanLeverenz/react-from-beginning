@@ -64,6 +64,16 @@ class FlashCard extends Component {
       );
     }
 
+    const cardStyle = this.props.cardStyle;
+    let card;
+    if (cardStyle === 'Multi') {
+      card = <MultiCard questionData={this.state.questionData} />;
+    } else if (cardStyle === 'Regular') {
+      card = <RegularCard questionData={this.state.questionData} />;
+    } else {
+      card = <RandomWeighted questionData={this.state.questionData} />;
+    }
+
     return (
       <div>
         <div className='row align-items-center card-holder'>
@@ -71,7 +81,7 @@ class FlashCard extends Component {
             onClick={this.flip}
             className={`col-sm-6 offset-sm-3 card mb-3 ${this.state.flipClass}`}
           >
-            <RegularCard questionData={this.state.questionData} />
+            {card}
           </div>
         </div>
         <button onClick={this.newCard} className='btn btn-primary btn-lg'>
