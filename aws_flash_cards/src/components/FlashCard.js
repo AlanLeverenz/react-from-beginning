@@ -16,7 +16,6 @@ class FlashCard extends Component {
     this.state = {
       flipClass: '',
       questionData: '',
-      ready: false,
     };
   }
 
@@ -42,20 +41,20 @@ class FlashCard extends Component {
     } else if (cardStyle === 'Weighted') {
       path = this.apiHostRoot + '/weighted';
     } else {
-      path = this.apiHostRoot + 'multi';
+      path = this.apiHostRoot + '/multi';
     }
 
     axios.get(path).then((response) => {
       // console.log(response.data);
       this.setState({
         questionData: response.data,
-        ready: true,
       });
+      this.props.nowReady();
     });
   };
 
   render() {
-    if (!this.state.ready) {
+    if (!this.props.ready) {
       this.newCard();
       return (
         <div className='spinner-wrapper'>

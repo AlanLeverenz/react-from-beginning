@@ -12,13 +12,18 @@ function MultiCard(props) {
     );
   });
 
+  const answerIndex = question.options.indexOf(question.answer);
+  const answerLetter = choices[answerIndex];
+
   return (
     <div>
       <div className='card-back'>
-        <div>AWS Service</div>
+        <div>{question.service}</div>
         <ul className='multi'>{options}</ul>
       </div>
-      <div className='card-front'>multiChoice Answer</div>
+      <div className='card-front'>
+        {answerLetter}. {question.answer}
+      </div>
     </div>
   );
 }
