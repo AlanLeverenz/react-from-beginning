@@ -1,5 +1,4 @@
 // const Home = () => <h1>Home</h1>;
-
 import React from 'react';
 
 function Home(props) {
