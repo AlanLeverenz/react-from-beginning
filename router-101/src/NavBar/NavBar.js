@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 
 function NavBar(props) {
-  // console.log(props);
+  console.log(props);
   return (
     <nav className='black'>
       <div className='nav-wrapper'>

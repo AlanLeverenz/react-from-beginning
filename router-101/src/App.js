@@ -13,12 +13,14 @@ const Signup = () => <h1>Sign up</h1>;
 function App() {
   return (
     <Router>
-      <NavBar />
+      <Route path='/' component={NavBar} />
       <Route
         exact
         path='/'
-        render={() => {
-          return <Home title='Hello' />;
+        render={(props) => {
+          return (
+            <Home title='Hello' history={props.history} match={props.match} />
+          );
         }}
       />
       <Route exact path='/host' component={Host} />
