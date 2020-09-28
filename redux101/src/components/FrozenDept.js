@@ -13,3 +13,13 @@ class FrozenDept extends Component {
 
 // export default FrozenDept;
 export default connect()(FrozenDept);
+
+// function x(n) {
+//   return (m) => {
+//     console.log(n+m);
+//     return(j)=>{
+//       console.log(n+m+j);
+//     }
+//   }
+// }
+// x(1)(2)(3);
