@@ -2,7 +2,9 @@
 // 1. Current State, usually provide a default state
 // 2. Info that came from any action
 
-export default (state = [], action) => {
+const seedData = ['TV Dinners', 'Frozen Veggies', 'Frozen Pizzas'];
+
+export default (state = seedData, action) => {
   return state;
 };
 
