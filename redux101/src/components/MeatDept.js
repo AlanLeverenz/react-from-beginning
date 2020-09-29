@@ -30,7 +30,7 @@ function mapStateToProps(state) {
   // property is the local prop name to this component
   // value will be the property in the root reducer... ie., a piece of the store
   return {
-    meatData: state.frozen,
+    meatData: state.meat,
   };
 }
 
