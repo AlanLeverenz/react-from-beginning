@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 // the glue is react-redux! we need the connect function
 import { connect } from 'react-redux';
 
-class FrozenDept extends Component {
+class MeatDept extends Component {
   render() {
-    const frozenInventory = this.props.frozenData.map((item, i) => {
+    const meatInventory = this.props.meatData.map((item, i) => {
       return (
         <li key={i}>
           {item.food}: {item.quantity}
@@ -16,8 +16,8 @@ class FrozenDept extends Component {
     });
     return (
       <div>
-        <h1>The frozen food department!</h1>
-        <ul>{frozenInventory}</ul>
+        <h1>The meat department!</h1>
+        <ul>{meatInventory}</ul>
       </div>
     );
   }
@@ -30,14 +30,13 @@ function mapStateToProps(state) {
   // property is the local prop name to this component
   // value will be the property in the root reducer... ie., a piece of the store
   return {
-    frozenData: state.frozen,
-    meatData: state.meat,
+    meatData: state.frozen,
   };
 }
 
 // export default FrozenDept;
 // connect takes 2 args, the first one is a function that is going to map a piece of redux state to this components props (mapStateToProps)
-export default connect(mapStateToProps)(FrozenDept);
+export default connect(mapStateToProps)(MeatDept);
 
 // function x(n) {
 //   return (m) => {
