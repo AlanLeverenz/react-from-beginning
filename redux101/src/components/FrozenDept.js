@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import updateFrozen from '../actions/frozenInvUpdate';
 
 // we want this component to know about redux.
 // to do that, we some help... or some glue
@@ -6,12 +7,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class FrozenDept extends Component {
+  increment = (operation, index) => {
+    // console.log(operation, index);
+    if (operation === '+') {
+    } else if (operation === '-') {
+    }
+  };
+
   render() {
     const frozenInventory = this.props.frozenData.map((item, i) => {
       return (
-        <li key={i}>
-          {item.food}: {item.quantity}
-        </li>
+        <div key={i}>
+          <li>
+            {item.food}: {item.quantity}
+          </li>
+          <input
+            type='button'
+            onClick={() => {
+              this.increment('+', i);
+            }}
+            value='+'
+          />
+          <input
+            type='button'
+            onClick={() => {
+              this.increment('-', i);
+            }}
+            value='-'
+          />
+        </div>
       );
     });
     return (

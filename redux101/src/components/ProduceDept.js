@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import updateProduce from '../actions/produceInvUpdate';
 
 // we want this component to know about redux.
 // to do that, we some help... or some glue
@@ -6,12 +7,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class ProduceDept extends Component {
+  increment = (operation, index) => {
+    // console.log(operation, index);
+    if (operation === '+') {
+      console.log(updateProduce());
+      updateProduce();
+    } else if (operation === '-') {
+    }
+  };
+
   render() {
     const produceInventory = this.props.produceData.map((item, i) => {
       return (
-        <li key={i}>
-          {item.food}: {item.quantity}
-        </li>
+        <div key={i}>
+          <li>
+            {item.food}: {item.quantity}
+          </li>
+          <input
+            type='button'
+            onClick={() => {
+              this.increment('+', i);
+            }}
+            value='+'
+          />
+          <input
+            type='button'
+            onClick={() => {
+              this.increment('-', i);
+            }}
+            value='-'
+          />
+        </div>
       );
     });
     return (
