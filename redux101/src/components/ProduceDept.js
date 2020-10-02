@@ -9,11 +9,7 @@ import { connect } from 'react-redux';
 class ProduceDept extends Component {
   increment = (operation, index) => {
     // console.log(operation, index);
-    if (operation === '+') {
-      console.log(updateProduce());
-      updateProduce();
-    } else if (operation === '-') {
-    }
+    updateProduce(operation, index);
   };
 
   render() {

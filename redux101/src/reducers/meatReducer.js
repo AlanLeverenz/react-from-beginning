@@ -20,10 +20,23 @@ const seedData = [
     quantity: 130,
   },
 ];
+
 export default (state = seedData, action) => {
   console.log('Meat reducer is running! (Data)');
   console.log(action);
-  return state;
+  if (action.type === 'updateMeat') {
+    console.log.log('I care about this action!!!');
+    // we make a copy of state, becuase we never ever mutate state
+    const newState = [...state];
+    if (action.payload.operation === '+') {
+      newState[action.payload.index].quantity++;
+    } else if (action.payload.operation === '-') {
+      newState[action.payload.index].quantity--;
+    }
+    return newState;
+  } else {
+    return state;
+  }
 };
 
 // function frozen(state = [], action) {

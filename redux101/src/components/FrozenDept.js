@@ -60,7 +60,7 @@ function mapStateToProps(state) {
 
 // mapDispatchToProps is how we tie our component to the dispatch
 // takes 1 arg: dispatch
-function mapDispatchToProps(disptach) {
+function mapDispatchToProps(dispatch) {
   // this function returns, bindActionCreators
   // and we hand bindActionCreators an object:
   // each property will be a local property each value will be a function that is dispatch when we run

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import updateMeat from '../actions/meatInvUpdate';
 
 // we want this component to know about redux.
 // to do that, we some help... or some glue
 // the glue is react-redux! we need the connect function
 import { connect } from 'react-redux';
+import updateMeat from '../actions/meatInvUpdate';
 
 class MeatDept extends Component {
   increment = (operation, index) => {
     // console.log(operation, index);
-    if (operation === '+') {
-    } else if (operation === '-') {
-    }
+    updateMeat(operation, index);
   };
 
   render() {
