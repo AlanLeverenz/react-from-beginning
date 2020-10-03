@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import updateProduce from '../actions/produceInvUpdate';
 
 // we want this component to know about redux.
 // to do that, we some help... or some glue
 // the glue is react-redux! we need the connect function
 import { connect } from 'react-redux';
+import updateProduce from '../actions/produceInvUpdate';
+import { bindActionCreators } from 'redux';
 
 class ProduceDept extends Component {
   increment = (operation, index) => {
     // console.log(operation, index);
-    updateProduce(operation, index);
+    this.props.updateProduce(operation, index);
   };
 
   render() {
@@ -56,9 +57,25 @@ function mapStateToProps(state) {
   };
 }
 
+// mapDispatchToProps is how we tie our component to the dispatch
+// takes 1 arg: dispatch
+function mapDispatchToProps(dispatch) {
+  // this function returns, bindActionCreators
+  // and we hand bindActionCreators an object:
+  // each property will be a local property
+  // each value will be a function that is dispatch when we run
+  // 2nd arg or bindActionCreators is the dispatch
+  return bindActionCreators(
+    {
+      updateProduce: updateProduce,
+    },
+    dispatch
+  );
+}
+
 // export default FrozenDept;
 // connect takes 2 args, the first one is a function that is going to map a piece of redux state to this components props (mapStateToProps)
-export default connect(mapStateToProps)(ProduceDept);
+export default connect(mapStateToProps, mapDispatchToProps)(ProduceDept);
 
 // function x(n) {
 //   return (m) => {
