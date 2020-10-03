@@ -20,7 +20,7 @@ export default (state = seedData, action) => {
   console.log('Frozen reducer is running! (Data)');
   console.log(action);
   if (action.type === 'updateFrozen') {
-    console.log.log('I care about this action!!!');
+    console.log('I care about this action!!!');
     // we make a copy of state, becuase we never ever mutate state
     const newState = [...state];
     if (action.payload.operation === '+') {

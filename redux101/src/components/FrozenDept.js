@@ -54,7 +54,6 @@ function mapStateToProps(state) {
   // value will be the property in the root reducer... ie., a piece of the store
   return {
     frozenData: state.frozen,
-    meatData: state.meat,
   };
 }
 
@@ -63,7 +62,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // this function returns, bindActionCreators
   // and we hand bindActionCreators an object:
-  // each property will be a local property each value will be a function that is dispatch when we run
+  // each property will be a local property
+  // each value will be a function that is dispatch when we run
   // 2nd arg or bindActionCreators is the dispatch
   return bindActionCreators(
     {

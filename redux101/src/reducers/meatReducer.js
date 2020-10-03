@@ -25,7 +25,7 @@ export default (state = seedData, action) => {
   console.log('Meat reducer is running! (Data)');
   console.log(action);
   if (action.type === 'updateMeat') {
-    console.log.log('I care about this action!!!');
+    console.log('I care about this action!!!');
     // we make a copy of state, becuase we never ever mutate state
     const newState = [...state];
     if (action.payload.operation === '+') {

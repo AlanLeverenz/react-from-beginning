@@ -24,8 +24,8 @@ export default (state = seedData, action) => {
   console.log('Produce reducer is running! (Data)');
   console.log(action);
   if (action.type === 'updateProduce') {
-    console.log.log('I care about this action!!!');
-    // we make a copy of state, becuase we never ever mutate state
+    console.log('I care about this action!!!');
+    // we make a copy of state, because we never ever mutate state
     const newState = [...state];
     if (action.payload.operation === '+') {
       newState[action.payload.index].quantity++;
