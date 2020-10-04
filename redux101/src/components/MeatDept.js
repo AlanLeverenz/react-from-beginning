@@ -8,9 +8,9 @@ import updateMeat from '../actions/meatInvUpdate';
 import { bindActionCreators } from 'redux';
 
 class MeatDept extends Component {
-  increment = (operation, index) => {
+  increment = (qChange, index) => {
     // console.log(operation, index);
-    this.props.updateMeat(operation, index);
+    this.props.updateMeat(qChange, index);
   };
 
   render() {
@@ -23,14 +23,14 @@ class MeatDept extends Component {
           <input
             type='button'
             onClick={() => {
-              this.increment('+', i);
+              this.increment(1, i);
             }}
             value='+'
           />
           <input
             type='button'
             onClick={() => {
-              this.increment('-', i);
+              this.increment(-1, i);
             }}
             value='-'
           />
