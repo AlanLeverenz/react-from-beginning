@@ -8,9 +8,9 @@ import updateProduce from '../actions/produceInvUpdate';
 import { bindActionCreators } from 'redux';
 
 class ProduceDept extends Component {
-  increment = (operation, index) => {
+  increment = (qChange, index) => {
     // console.log(operation, index);
-    this.props.updateProduce(operation, index);
+    this.props.updateProduce(qChange, index);
   };
 
   render() {
@@ -23,14 +23,14 @@ class ProduceDept extends Component {
           <input
             type='button'
             onClick={() => {
-              this.increment('+', i);
+              this.increment(1, i);
             }}
             value='+'
           />
           <input
             type='button'
             onClick={() => {
-              this.increment('-', i);
+              this.increment(-1, i);
             }}
             value='-'
           />
@@ -63,7 +63,7 @@ function mapDispatchToProps(dispatch) {
   // this function returns, bindActionCreators
   // and we hand bindActionCreators an object:
   // each property will be a local property
-  // each value will be a function that is dispatch when we run
+  // each value will be a function that is dispatched when we run
   // 2nd arg or bindActionCreators is the dispatch
   return bindActionCreators(
     {

@@ -26,7 +26,7 @@ export default (state = seedData, action) => {
   if (action.type === 'updateMeat') {
     console.log('I care about this action!!!');
     console.log(action);
-    // we make a copy of state, becuase we never ever mutate state
+    // we make a copy of state, because we never ever mutate state
     // if (action.type === 'updateMeat') {
     const newState = [...state];
     const payload = action.payload;

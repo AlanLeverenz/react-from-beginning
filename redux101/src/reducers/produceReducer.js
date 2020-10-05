@@ -26,19 +26,11 @@ export default (state = seedData, action) => {
   if (action.type === 'updateProduce') {
     console.log('I care about this action!!!');
     // we make a copy of state, because we never ever mutate state
+    const payload = action.payload;
     const newState = [...state];
-    if (action.payload.operation === '+') {
-      newState[action.payload.index].quantity++;
-    } else if (action.payload.operation === '-') {
-      newState[action.payload.index].quantity--;
-    }
+    newState[action.payload.index].quantity += payload.qChange;
     return newState;
   } else {
     return state;
   }
 };
-
-// function frozen(state = [], action) {
-//     return state;
-// }
-// export default frozen;
