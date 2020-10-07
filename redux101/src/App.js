@@ -3,14 +3,19 @@ import './App.css';
 import FrozenDept from './components/FrozenDept';
 import ProduceDept from './components/ProduceDept';
 import MeatDept from './components/MeatDept';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div className='App'>
-      <FrozenDept />
-      <ProduceDept />
-      <MeatDept />
-    </div>
+    <Router>
+      <div className='App'>
+        <Route path='/' component={NavBar} />
+        <Route path='/frozen-dept' component={FrozenDept} />
+        <Route path='/meat-dept' component={MeatDept} />
+        <Route path='/produce-dept' component={ProduceDept} />
+      </div>
+    </Router>
   );
 }
 
