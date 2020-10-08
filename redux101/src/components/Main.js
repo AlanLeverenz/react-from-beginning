@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import clearInventory from '../actions/clearInventory';
+import { bindActionCreators } from 'redux';
 
 class Main extends Component {
+  //   clearInventoryAction = () => {
+  //     this.props.clearInventory();
+  //   };
+
   render() {
+    // this.props.clearInventory();
     const frozenQuantity = this.props.frozenData.reduce(
       (accum, frozenItem) => accum + frozenItem.quantity,
       0
@@ -20,6 +27,9 @@ class Main extends Component {
         <h2>FrozenDept: {frozenQuantity}</h2>
         <h2>MeatDept: {meatQuantity}</h2>
         <h2>ProduceDept: {produceQuantity}</h2>
+        <button onClick={this.props.clearInventory}>
+          Clear All Inventory!
+        </button>
       </div>
     );
   }
@@ -33,4 +43,13 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Main);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      clearInventory: clearInventory,
+    },
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

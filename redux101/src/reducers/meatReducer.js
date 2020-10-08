@@ -28,9 +28,15 @@ export default (state = seedData, action) => {
     console.log(action);
     // we make a copy of state, because we never ever mutate state
     // if (action.type === 'updateMeat') {
-    const newState = [...state];
+    let newState = [...state];
     const payload = action.payload;
     newState[payload.index].quantity += payload.qChange;
+    return newState;
+  } else if (action.type === 'clearInventory') {
+    let newState = [...state];
+    newState.forEach((item, i) => {
+      item.quantity = 0;
+    });
     return newState;
   } else {
     return state;
