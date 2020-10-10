@@ -4,11 +4,12 @@ const weatherApi = 'http://api.openweathermap.org/data/2.5/weather';
 const weatherAPIKey = '7d4f2cda5bab002442683b32490d0c00';
 const scale = 'imperial'; //metric
 
-export default (city) => {
+export default async (city) => {
   const weatherUrl = `${weatherApi}?q=${city}&units=${scale}&appid=${weatherAPIKey}`;
-  console.log(city);
+  const response = await axios.get(weatherUrl);
+  console.log(response);
   return {
     type: 'cityUpdate',
-    payload: {},
+    payload: response.data,
   };
 };
