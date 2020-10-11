@@ -7,7 +7,7 @@ const scale = 'imperial'; //metric
 export default async (city) => {
   const weatherUrl = `${weatherApi}?q=${city}&units=${scale}&appid=${weatherAPIKey}`;
   const response = await axios.get(weatherUrl);
-  console.log(response);
+  // console.log(response);
   return {
     type: 'cityUpdate',
     payload: response.data,
