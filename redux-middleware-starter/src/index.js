@@ -7,8 +7,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/rootReducer';
 import reduxPromise from 'redux-promise';
+import reduxThunk from 'redux-thunk';
 
-const theStore = applyMiddleware(reduxPromise)(createStore)(rootReducer);
+// setup a const with redux middlewares
+//spread it in theStore const
+
+const middleWare = [reduxPromise, reduxThunk];
+
+const theStore = applyMiddleware(...middleWare)(createStore)(rootReducer);
 
 // to break it down:
 // const middlewareApplied = applyMiddleware(reduxPromise);
