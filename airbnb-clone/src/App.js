@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className='App'>
-      <h1>AirBnB Clone</h1>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return <h1>App</h1>;
+  }
 }
 
 export default App;
