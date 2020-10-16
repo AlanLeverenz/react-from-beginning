@@ -12,10 +12,10 @@ class SearchBox extends Component {
   changeWhere = (e) => {
     this.setState({ where: e.target.value });
   };
-  changeIn = (e) => {
+  changeCheckIn = (e) => {
     this.setState({ checkIn: e.target.value });
   };
-  changeOut = (e) => {
+  changeCheckOut = (e) => {
     this.setState({ checkOut: e.target.value });
   };
   changeGuests = (e) => {
