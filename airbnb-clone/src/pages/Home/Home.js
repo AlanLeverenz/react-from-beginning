@@ -3,6 +3,7 @@ import './Home.css';
 import SearchBox from './SearchBox';
 import Spinner from '../../utility/Spinner/Spinner';
 import axios from 'axios';
+import Cities from '../../utility/City/Cities';
 
 class Home extends Component {
   state = {
@@ -16,10 +17,14 @@ class Home extends Component {
     // console.log(recommendedCities.data);
     this.setState({ cities: recommendedCities.data });
   }
+
   render() {
     if (this.state.cities.length === 0) {
       return <Spinner />;
     }
+
+    const recCities = <Cities cities={this.state.cities} />;
+
     return (
       <div className='container-fluid'>
         <div className='row'>
@@ -28,6 +33,7 @@ class Home extends Component {
               <SearchBox />
             </div>
           </div>
+          {recCities}
         </div>
       </div>
     );
