@@ -12,7 +12,7 @@ class Home extends Component {
     europeCities: {},
     asiaCities: {},
     exoticCities: {},
-  
+    activities: [],
   };
 
   async componentDidMount() {
@@ -42,12 +42,15 @@ class Home extends Component {
         })
     })
 
-    // const activitiesUrl = `${window.apiHost}/activities/today`
-    // const activities = await axios(activities)
+    const activitiesUrl = `${window.apiHost}/activities/today`
+    const activities = await axios(activitiesUrl);
+    this.setState({
+      activities: activities.data,
+    })
   }
 
   render() {
-    console.log(this.state.activities);
+    // console.log(this.state.activities);
     if (this.state.cities.length === 0) {
       return <Spinner />;
     }
@@ -69,7 +72,7 @@ class Home extends Component {
             </div>
 
             <div className="col s12">
-              <Activities />
+              <Activities activities={this.state.activities} />
             </div>
 
             <div className="col s12">
