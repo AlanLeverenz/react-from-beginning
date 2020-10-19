@@ -12,7 +12,10 @@ class Home extends Component {
 
   async componentDidMount() {
     const citiesUrl = `${window.apiHost}/cities/recommended`;
-    console.log(citiesUrl);
+    const europeCitiesUrl = `${window.apiHost}/cities/europe`;
+    const asiaCitiesUrl = `${window.apiHost}/cities/asia`;
+    const exoticCitiesUrl = `${window.apiHost}/cities/exotic`;
+    
     const recommendedCities = await axios.get(citiesUrl);
     // console.log(recommendedCities.data);
     this.setState({ cities: recommendedCities.data });
@@ -23,19 +26,24 @@ class Home extends Component {
       return <Spinner />;
     }
 
-    return (
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='home col s12'>
-            <div className='upper-fold'>
-              <SearchBox />
+    return (<>
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='home col s12'>
+              <div className='upper-fold'>
+                <SearchBox />
+              </div>
             </div>
           </div>
-          <div className="col s12">
-          <Cities cities={this.state.cities} />
+        </div>
+        <div className="container-fluid lower-fold">
+          <div className="row">
+            <div className="col s12">
+              <Cities cities={this.state.cities} header="Recommended Cities For You"/>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

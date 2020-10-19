@@ -10,7 +10,12 @@ function Cities(props) {
       </div>
     );
   });
-  return <SlickSlider elements={cities} />;
+  return (
+    <div className="cities-wrapper">
+      <h1 className="main-header-text">{props.header}</h1>
+      <SlickSlider elements={cities} />
+    </div>
+    )
 }
 
 export default Cities;
