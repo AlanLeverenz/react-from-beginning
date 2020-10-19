@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Activity.css';
+import {Link} from 'react-router-dom';
 
 class Activity extends Component{
 
@@ -12,9 +13,21 @@ class Activity extends Component{
 // totalRatings: 131
 
     render(){
+        const { activityType, cost, id, image, rating, title, totalRatings } =  this.props.activity;
+        const starSize = {
+            fontSize: 12
+        }
         return(
             <div className="activity">
-                <h1>Activity</h1>
+            <Link to={`/activity/${id}`}>
+                <img src={image} alt="activity" />
+                <div className="activity-type">{activityType}</div>
+                <div className="title">{title}</div>
+                <div className="cost">${cost}/person</div>
+                <div className="rating">
+                <i className="material-icons" style={starSize}>star</i>{rating} ({totalRatings})
+                </div>
+            </Link>
             </div>
         )
     }
