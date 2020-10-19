@@ -15,7 +15,7 @@ class Slider extends Component {
       slidesToScroll: 1,
     };
     return (
-      <div className='slider'>
+      <div className='slick'>
         <SlickSlider {...settings}>{this.props.elements}</SlickSlider>
       </div>
     );
