@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './NavBar.css';
 import { Link } from 'react-router-dom';
+import myBnb from "../NavBar/mybnb.png"
 
 class NavBar extends Component {
   render() {
@@ -16,7 +17,7 @@ class NavBar extends Component {
           <nav className={navColor}>
             <div className='nav-wrapper'>
               <Link to='/' className='left'>
-                airbnb
+                <img src={myBnb} alt="mybnb" width={72}></img>
               </Link>
               <ul id='nav-mobile' className='right'>
                 <li>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class Venue extends Component{
 
     render(){
-        // console.log(this.props.venue);
+        console.log(this.props.venue);
         const { id, title, location, pricePerNight, imageUrl, rating } = this.props.venue;
         const starSize = {
             fontSize: 12
