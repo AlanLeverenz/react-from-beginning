@@ -17,7 +17,7 @@ class NavBar extends Component {
           <nav className={navColor}>
             <div className='nav-wrapper'>
               <Link to='/' className='left'>
-                <img src={myBnb} alt="mybnb" width={72}></img>
+                <img src={myBnb} alt="mybnb" width={64}></img>
               </Link>
               <ul id='nav-mobile' className='right'>
                 <li>
