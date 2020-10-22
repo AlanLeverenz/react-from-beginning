@@ -9,7 +9,7 @@ function Point(props){
     return(
         <div>
             <div className="point-title">{props.point}</div>
-                <div className="point-desc">{descOjb.text}</div>
+            <div className="point-desc">{descOjb.text}</div>
         </div>
     )
 }
