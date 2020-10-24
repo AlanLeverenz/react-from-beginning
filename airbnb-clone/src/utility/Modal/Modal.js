@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import './Modal.css';
+import openModal from '../../actions/openModal';
 
 class Modal extends Component{
 
     state = {
 
+    }
+
+    closeModal = ()=> {
+        console.log(this.props.openModal);
+        this.props.openModal('closed','');
     }
 
     render(){
@@ -24,6 +30,9 @@ class Modal extends Component{
                     <div className="col right">
                         <span onClick={this.closeModal} className="close">&times;</span>
                     </div>
+                    <div className="">
+                        {this.props.siteModal.content}
+                    </div>
                 </div>
             </div>
         )
@@ -38,7 +47,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatcher){
     return bindActionCreators({
-
+        openModel: openModal
     },dispatcher)
 }
 
