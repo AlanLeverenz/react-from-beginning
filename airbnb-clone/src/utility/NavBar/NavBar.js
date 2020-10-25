@@ -38,7 +38,7 @@ class NavBar extends Component {
                 <li>
                   <Link to='/'>Sign up</Link>
                 </li>
-                <li onClick={()=>{this.props.openModal('open',"Log in")}}>
+                <li onClick={()=>{this.props.openModal('open','Log in')}}>
                   Log in
                 </li>
               </ul>

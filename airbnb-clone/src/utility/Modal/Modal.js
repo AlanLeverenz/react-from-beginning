@@ -11,16 +11,17 @@ class Modal extends Component{
     }
 
     closeModal = ()=> {
-        console.log(this.props.openModal);
         this.props.openModal('closed','');
     }
+    // in place of line 32:
+    // <span onClick={this.closeModal} className="close">&times;</span>
 
     render(){
 
         let modalInlineStyle;
         if(this.props.siteModal.openClose === "open"){
             modalInlineStyle = {display: 'block'}
-        }else{
+        }else if(this.props.siteModal.openClose === "closed"){
             modalInlineStyle = {display: 'none'};
         }
 
@@ -28,7 +29,8 @@ class Modal extends Component{
             <div className="site-modal" style={modalInlineStyle}>
                 <div className="modal-content">
                     <div className="col right">
-                        <span onClick={this.closeModal} className="close">&times;</span>
+                        <span onClick={()=>{this.props.openModal('closed','')}} className="close">&times;</span>
+
                     </div>
                     <div className="">
                         {this.props.siteModal.content}
@@ -47,7 +49,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatcher){
     return bindActionCreators({
-        openModel: openModal
+        openModal: openModal
     },dispatcher)
 }
 
