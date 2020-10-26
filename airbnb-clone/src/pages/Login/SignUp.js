@@ -3,9 +3,9 @@ import './Login.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
-import SignUp from './SignUp';
+import Login from './Login';
 
-class Login extends Component {
+class SignUp extends Component {
     state = {
 
     }
@@ -20,14 +20,12 @@ class Login extends Component {
                         <span>or</span>
                         <div className="or-divider"></div>
                     </div>
-                    <input type="text" className="browser-default" placeholder="Email address" />
-                    <input type="password" className="browser-default" placeholder="Password" />
-                    <button className="sign-up-button">Login</button>
+                    <button className="sign-up-button">Sign up with email</button>
                     <div className="divider"></div>
-                    <div>Don't have an account? <span onClick={()=>{this.props.openModal('open', <SignUp />)}}>Sign Up</span>
-                    </div>
+                    <div>Already have an account? <span onClick={()=>{this.props.openModal('open', <Login />)}}>Log In</span></div>
                 </form>
-            </div> 
+            </div>
+
         )
     }
 }
@@ -38,4 +36,4 @@ function mapDispatchToProps(dispatcher){
     }, dispatcher)
   }
   
-  export default connect(null, mapDispatchToProps)(Login);
+  export default connect(null, mapDispatchToProps)(SignUp);
