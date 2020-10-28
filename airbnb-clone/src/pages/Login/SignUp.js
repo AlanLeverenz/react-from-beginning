@@ -7,7 +7,17 @@ import Login from './Login';
 
 class SignUp extends Component {
     state = {
+        lowerPartOfForm: ""
+    }
 
+    componentDidMount(){
+        this.setState({
+            lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>
+        })
+    }
+
+    showInputs = () => {
+        console.log("user click on signup with email button");
     }
 
     render(){
@@ -20,7 +30,7 @@ class SignUp extends Component {
                         <span>or</span>
                         <div className="or-divider"></div>
                     </div>
-                    <button className="sign-up-button">Sign up with email</button>
+                    {this.state.lowerPartOfForm}
                     <div className="divider"></div>
                     <div>Already have an account? <span onClick={()=>{this.props.openModal('open', <Login />)}}>Log In</span></div>
                 </form>
