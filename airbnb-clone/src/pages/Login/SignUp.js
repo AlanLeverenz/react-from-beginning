@@ -20,10 +20,17 @@ class SignUp extends Component {
     //     })
     // }
 
+    changeEmail = (e)=>this.setState({email:e.target.value});
+    changePassword = (e)=>this.setState({password:e.target.value});
+
+
     showInputs = () => {
-        console.log("user click on signup with email button");
+        this.setState({
+            lowerPartOfForm: <SignUpInputFields changeEmail={this.changeEmail} changePassword={this.changePassword}/>
+        })
     }
 
+    submitLogin
     render(){
         return(
             <div className="login-form">
@@ -51,3 +58,28 @@ function mapDispatchToProps(dispatcher){
   }
   
   export default connect(null, mapDispatchToProps)(SignUp);
+
+  // inline component const 
+  const SignUpInputFields = (props) => {
+      return(
+          <div className="sign-up-wrapper">
+            <div className="col m12">
+                <div className="input-field id="email>
+                    <div className="form-label">Email
+                    <input type="text" placeholder="Email" onChange={props.changeEmail} />
+                    </div>
+                </div>
+            </div>
+            <div className="col m12">
+                <div className="input-field id="password>
+                    <div className="form-label">Password
+                    <input type="password" placeholder="Password" onChange={props.changePassword} />
+                    </div>
+                </div>
+            </div>
+            <div className="col m12">
+                <button type="submit" className="btn red accent-2">Sign Up</button>
+            </div>
+          </div>
+      )
+  }
