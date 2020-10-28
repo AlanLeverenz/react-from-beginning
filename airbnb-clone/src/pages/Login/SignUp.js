@@ -6,15 +6,19 @@ import openModal from '../../actions/openModal';
 import Login from './Login';
 
 class SignUp extends Component {
-    state = {
-        lowerPartOfForm: ""
+
+    constructor() {
+        super();
+        this.state = {
+            lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>
+        }
     }
 
-    componentDidMount(){
-        this.setState({
-            lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>
-        })
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>
+    //     })
+    // }
 
     showInputs = () => {
         console.log("user click on signup with email button");
