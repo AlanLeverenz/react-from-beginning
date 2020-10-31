@@ -50,7 +50,8 @@ class SignUp extends Component {
                     </div>
                     {this.state.lowerPartOfForm}
                     <div className="divider"></div>
-                    <div>Already have an account? <span onClick={()=>{this.props.openModal('open', <Login />)}}>Log In</span></div>
+                    <div>Don't have an account? <span className="pointer" onClick={()=>{this.props.openModal('open', <Login />)}}>Log in</span>
+                    </div>
                 </form>
             </div>
 
