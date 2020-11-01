@@ -43,7 +43,12 @@ class SignUp extends Component {
             password: this.state.password
         }
         const resp = await axios.post(url,data);
-        console.log(resp.data);
+        const token = resp.data.token;
+        console.log(token);
+
+        const url2 = `${window.apiHost}/users/toekn-check`;
+        const resp2 = await axios.post(url2,{token});
+        console.log(resp2.data);
     }
 
     render(){
