@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
 import Login from './Login';
+import axios from 'axios';
 
 class SignUp extends Component {
 
@@ -32,10 +33,17 @@ class SignUp extends Component {
         })
     }
 
-    submitLogin = (e) =>{
+    submitLogin = async (e) =>{
         e.preventDefault();
-        console.log(this.state.email);
-        console.log(this.state.password);
+        // console.log(this.state.email);
+        // console.log(this.state.password);
+        const url = `${window.apiHost}/users/signup`;
+        const data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        const resp = await axios.post(url,data);
+        console.log(resp.data);
     }
 
     render(){

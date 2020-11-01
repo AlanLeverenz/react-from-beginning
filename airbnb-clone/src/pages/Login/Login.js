@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
 import SignUp from './SignUp';
+// import axios from 'axios';
 
 class Login extends Component {
     state = {
