@@ -5,6 +5,7 @@ import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
 import Login from './Login';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 class SignUp extends Component {
 
@@ -46,9 +47,33 @@ class SignUp extends Component {
         const token = resp.data.token;
         console.log(token);
 
-        const url2 = `${window.apiHost}/users/toekn-check`;
-        const resp2 = await axios.post(url2,{token});
-        console.log(resp2.data);
+        // resp.data.msg could be:
+        // - invalidData
+        // - userExists
+        // - userAdded
+        if(resp.data.msg === "userExists") {
+            swal({
+                title: "Email Exists",
+                text: "The email you provided is already registered. Please try another.",
+                icon: "error"
+              })
+        } else if (resp.data.msg === "invalidData") {
+            swal({
+                title: "Invalid email/password",
+                text: "JPlease provide a valid email and password",
+                icon: "error"
+              })
+        } else if (resp.data.msg === "userAdded") {
+            swal({
+                title: "Success!",
+                icon: "success",
+            })
+        }
+
+        // const url2 = `${window.apiHost}/users/token-check`;
+        // const resp2 = await axios.post(url2,{token});
+        // console.log(resp2.data);
+
     }
 
     render(){
