@@ -3,6 +3,7 @@ import './Login.css';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
+import regAction from '../../actions/regAction';
 import Login from './Login';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -60,7 +61,7 @@ class SignUp extends Component {
         } else if (resp.data.msg === "invalidData") {
             swal({
                 title: "Invalid email/password",
-                text: "JPlease provide a valid email and password",
+                text: "Please provide a valid email and password",
                 icon: "error"
               })
         } else if (resp.data.msg === "userAdded") {
@@ -68,6 +69,8 @@ class SignUp extends Component {
                 title: "Success!",
                 icon: "success",
             })
+            // we call our register action to update our auth reducer (state)
+            this.props.regAction(resp.data)
         }
 
         // const url2 = `${window.apiHost}/users/token-check`;
@@ -77,6 +80,9 @@ class SignUp extends Component {
     }
 
     render(){
+
+        console.log(this.props.auth);
+
         return(
             <div className="login-form">
                 <form onSubmit={this.submitLogin}>
@@ -97,13 +103,20 @@ class SignUp extends Component {
     }
 }
 
+function mapStateToProps(state){
+    return{
+        auth: state.auth,
+    }
+}
+
 function mapDispatchToProps(dispatcher){
     return bindActionCreators({
-      openModal: openModal
+      openModal: openModal,
+      regAction: regAction
     }, dispatcher)
   }
   
-  export default connect(null, mapDispatchToProps)(SignUp);
+  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
 
   // inline component const 
   const SignUpInputFields = (props) => {
