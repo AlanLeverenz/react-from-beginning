@@ -5,6 +5,7 @@ import myBnb from "../NavBar/mybnb.png";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import openModal from '../../actions/openModal';
+import logoutAction from '../../actions/logoutAction';
 import Login from '../../pages/Login/Login';
 import SignUp from '../../pages/Login/SignUp';
 
@@ -44,19 +45,17 @@ class NavBar extends Component {
                 <li>
                   <Link to='/'>Help</Link>
                 </li>
-
+                console.log(this.props.auth.email);
                 {this.props.auth.email
                   ? <>
                     <li>Hello, {this.props.auth.email}</li>
-                    <li>Logout</li>
+                    <li onClick={()=>this.props.logoutAction()}>Logout</li>
                     </>
                   : <>
                       <li className="login-signup" onClick={()=>{this.props.openModal('open',<SignUp />)}}>Sign up</li>
-                      <li className="login-signup" onClick={()=>{this.props.openModal('open',<Login />)}}>Log in
-                      </li>
+                      <li className="login-signup" onClick={()=>{this.props.openModal('open',<Login />)}}>Log in</li>
                     </>
                 }
-
               </ul>
             </div>
           </nav>
@@ -74,7 +73,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatcher){
   return bindActionCreators({
-    openModal: openModal
+    openModal: openModal,
+    logoutAction: logoutAction,
   }, dispatcher)
 }
 
