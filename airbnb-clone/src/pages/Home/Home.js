@@ -90,8 +90,8 @@ class Home extends Component {
             </div>
 
             <div className="col s12">
-            <Venues venues={this.state.recVenues.venues} header={this.state.recVenues.header} />
-        </div>
+              <Venues venues={this.state.recVenues.venues} header={this.state.recVenues.header} />
+            </div>
 
             <div className="col s12">
               <Cities cities={this.state.asiaCities.cities} header={this.state.asiaCities.header}/>

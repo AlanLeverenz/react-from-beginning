@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './SingleFullVenue.css';
 import axios from 'axios';
 import Point from './Point';
+import { connect } from 'react-redux';
 
 class SingleFullVenue extends Component {
 
@@ -30,6 +31,8 @@ async componentDidMount() {
     }
 
     render(){
+        console.log(this.props.auth);
+
         console.log(this.state.singleVenue);
         const sv = this.state.singleVenue;
         return(
@@ -83,4 +86,11 @@ async componentDidMount() {
     }
 }
 
-export default SingleFullVenue;
+function mapStateToProps(state){
+    return {
+        auth: state.auth,
+    }
+}
+
+export default connect(mapStateToProps)(SingleFullVenue);
+
