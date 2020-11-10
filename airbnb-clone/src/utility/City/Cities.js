@@ -10,6 +10,7 @@ function Cities(props) {
       </div>
     );
   });
+  console.log({cities});
   return (
     <div className="cities-wrapper">
       <h1 className="main-header-text">{props.header}</h1>
