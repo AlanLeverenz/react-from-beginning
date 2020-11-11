@@ -3,8 +3,9 @@ import './SingleFullVenue.css';
 import axios from 'axios';
 import Point from './Point';
 import { connect } from 'react-redux';
-import showModal from '../../actions/openModal';
+import openModal from '../../actions/openModal';
 import {bindActionCreators} from 'redux';
+import Login from '../Login/Login';
 
 class SingleFullVenue extends Component {
 
@@ -80,7 +81,7 @@ async componentDidMount() {
                         <div className="col s12 center">
                         {this.props.auth.token ?
                             <button onClick={this.reserveNow} className="btn red accent-2">Reserve</button>
-                        : <div>You must log in to reserve</div>
+                        : <div>You must <span className="text-link" onClick={()=>{this.props.openModal('open',<Login />)}}>Log in</span> to reserve</div>
                         }
                         </div>
                     </div>
@@ -99,7 +100,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return bindActionCreators({
-        showModal
+        openModal
     },dispatch);
 }
 
