@@ -7,6 +7,7 @@ import openModal from '../../actions/openModal';
 import {bindActionCreators} from 'redux';
 import Login from '../Login/Login';
 import moment from 'moment';
+import swal from 'sweetalert';
 
 class SingleFullVenue extends Component {
 
@@ -39,12 +40,34 @@ async componentDidMount() {
 
     reserveNow = (e) => {
         const startDayMoment = moment(this.state.checkIn);
-        console.log(startDayMoment);
         const endDayMoment = moment(this.state.checkOut);
-        console.log(endDayMoment);
         const diffDays = endDayMoment.diff(startDayMoment, "days");
         console.log(diffDays);
+        if(diffDays < 1){
+            //check in date must be before checkout date
+            swal({
+                title: "Check out date must be after check in date",
+                icon: 'error'
+            })
+        } else if(isNaN(diffDays)){
+            //bad date
+            swal({
+                title: "Please make sure your dates are valid",
+                icon: 'error',
+            })
+        } else {
+            // diff days is a valid number. get the price.
+            const pricePerNight = this.state.singleVenue.pricePerNight;
+            const totalPrice = pricePerNight * diffDays;
+            console.log(totalPrice);
+        }
     }
+
+
+    // const stripePublicKey = 'pk_test_5198HtPL5CfCPYJ3X8TTrO06ChWxotTw6Sm2el4WkYdrfN5Rh7vEuVguXyPrTezvm3ntblRX8TpjAHeMQfHkEpTA600waD2fMrT';
+
+    // https://js.stripe.com/v3
+
 
     render(){
         console.log(this.props.auth);
