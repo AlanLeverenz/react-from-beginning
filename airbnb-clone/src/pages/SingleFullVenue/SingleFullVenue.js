@@ -6,12 +6,16 @@ import { connect } from 'react-redux';
 import openModal from '../../actions/openModal';
 import {bindActionCreators} from 'redux';
 import Login from '../Login/Login';
+import moment from 'moment';
 
 class SingleFullVenue extends Component {
 
     state = {
         singleVenue: {},
-        points: []
+        points: [],
+        checkIn: [],
+        checkOut: [],
+        numberOfGuests: 1
     }
 
 async componentDidMount() {
@@ -29,8 +33,15 @@ async componentDidMount() {
     this.setState({singleVenue,points});
 }
 
+    changeNumberOfGuests = (e)=>{this.setState({numberOfGuests: e.target.value})}
+    changeCheckIn = (e)=>{this.setState({checkIn: e.target.value})}
+    changeCheckOut = (e)=>{this.setState({checkOut: e.target.value})}
+
     reserveNow = (e) => {
-        console.log("User wants to reserve!")
+        const startDayMoment = moment(this.state.checkIn);
+        console.log(startDayMoment);
+        const endDayMoment = moment(this.state.checkOut);
+        console.log(endDayMoment);
     }
 
     render(){
@@ -61,13 +72,13 @@ async componentDidMount() {
                         <div className="price-per-day">${sv.pricePerNight} <span>per day</span></div>
                         <div className="rating">{sv.rating}</div>
                         <div className="col s6">Check-In
-                            <input type="date" />
+                        <input type="date" onChange={this.changeCheckIn} value={this.state.checkIn} />
                         </div>
                         <div className="col s6">Check-Out
-                            <input type="date" />
+                        <input type="date" onChange={this.changeCheckOut} value={this.state.checkOut} />
                         </div>
                         <div className="col s12">
-                            <select className="browser-default">
+                        <select className="browser-default" onChange={this.changeNumberOfGuests} value={this.state.numberOfGuests}>
                                 <option value="1">1 Guest</option>
                                 <option value="2">2 Guests</option>
                                 <option value="3">3 Guests</option>
