@@ -42,6 +42,8 @@ async componentDidMount() {
         console.log(startDayMoment);
         const endDayMoment = moment(this.state.checkOut);
         console.log(endDayMoment);
+        const diffDays = endDayMoment.diff(startDayMoment, "days");
+        console.log(diffDays);
     }
 
     render(){
