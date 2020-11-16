@@ -60,8 +60,8 @@ async componentDidMount() {
             // diff days is a valid number. get the price.
             const pricePerNight = this.state.singleVenue.pricePerNight;
             const totalPrice = pricePerNight * diffDays;
-            const stripePublicKey = 'pk_test_5198HtPL5CfCPYJ3X8TTrO06ChWxotTw6Sm2el4WkYdrfN5Rh7vEuVguXyPrTezvm3ntblRX8TpjAHeMQfHkEpTA600waD2fMrT';
             const scriptUrl = 'https://js.stripe.com/v3';
+            const stripePublicKey = 'pk_test_5198HtPL5CfCPYJ3X8TTrO06ChWxotTw6Sm2el4WkYdrfN5Rh7vEuVguXyPrTezvm3ntblRX8TpjAHeMQfHkEpTA600waD2fMrT';
             // Moving the below code to it's own module
             // await new Promise((resolve, reject)=>{
             //     const script = document.createElement('script');
@@ -77,6 +77,27 @@ async componentDidMount() {
             await loadScript(scriptUrl); // we don't need a variable, we just need to wait
             console.log("Let's run some Stripe");
             const stripe = window.Stripe(stripePublicKey);
+            const stripeSessionUrl = `${window.apiHost}/payment/create-session`;
+            const data = {
+                venueData: this.state.singleVenue,
+                totalPrice,
+                diffDays,
+                pricePerNight,
+                checkIn: this.state.checkIn,
+                checkOut: this.state.checkOut,
+                token: this.props.auth.token,
+                numberOfGuests: this.state.numberOfGuests,
+                currency: 'USD',
+            }
+            
+            const sessionVar = await axios.post(stripeSessionUrl,data);
+            // console.log(sessionVar.data);
+            stripe.redirectToCheckout({
+                sessionId: sessionVar.data.id,
+            }).then((result)=>{
+                console.log(result);
+                // if the network fails, this will run
+            })
         }
     }
 
