@@ -9,7 +9,7 @@ library.add(faLongArrowAltRight);
 
 class PaymentSuccess extends Component {
 
-    start = {
+    state = {
 
     }
 
