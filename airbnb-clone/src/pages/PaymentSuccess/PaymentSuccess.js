@@ -13,17 +13,32 @@ library.add(faLongArrowAltRight);
 class PaymentSuccess extends Component {
 
     state = {
-
+        reservationDetails: {},
+        venueData: {},
+        waiting: true,
     }
 
     async componentDidMount(){
         const stripeToken = this.props.match.params.stripeToken;
         const token = this.props.auth.token;
         const data = {stripeToken,token};
-        console.log(data);
+        const successUrl = `${window.apiHost}/payment/success`;
+        const resp = await axios.post(successUrl,data);
+        console.log(resp.data);
+        this.setState({
+            reservationDetails: resp.data.reservationDetails,
+            userData: resp.data.userData,
+            waiting: false
+        })
     }
 
     render(){
+        if(this.state.waiting){
+            return(<Spinner/>)
+        }
+        const rd = this.state.reservationDetails;
+        const vd = rd.venueData;
+        console.log(vd);
         return(
             <div className="reservation-success row">
                 <h1 className="col m12 center">Start Packing!</h1>
