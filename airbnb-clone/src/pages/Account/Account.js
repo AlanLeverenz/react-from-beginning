@@ -22,7 +22,19 @@ class Account extends Component{
 
     render(){
         return(
-            <h1>Account sanity Check</h1>
+            <div className="account container-fluid">
+                <AccountSideBar />
+                <div className="row">
+                    <div className="col s8 offset-s3">
+                    <Route exact path="/account" render={()=>
+                        <h1>Choose an option on the left!</h1>
+                    } />
+                        <Route exact path="/account/reservations/confirmed" component={Bookings} />
+                        <Route exact path="/account/reservations/past" component={Bookings} />
+                        <Route exact path="/account/change-pass" component={ChangePassword} />
+                    </div>
+                </div>
+            </div>
         )
     }
 
