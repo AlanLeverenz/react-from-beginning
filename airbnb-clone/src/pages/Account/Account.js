@@ -17,7 +17,12 @@ class Account extends Component{
     }
 
     async componentDidMount(){
-
+        const accountUrl = `${window.apiHost}/users/getBookings`;
+        const data = {
+            token: this.props.auth.token,
+        }
+        const resp = await axios.post(accountUrl,data);
+        console.log(resp.data);
     }
 
     render(){
