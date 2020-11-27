@@ -6,10 +6,13 @@ import axios from 'axios';
 function Bookings(props){
 
     const bookings = props.bookings.map((booking, i)=>{
-        const dates = '';
+        const dates = `{moment(booking.checkIn).format('MMM Do')} - {moment(booking.checkOut).format('MMM Do YYYY')}`;
         return(
             <tr key={i} className="booking-row">
-                <td>{booking.status}</td>
+                <td>{booking.status === 'confirmed' && props.type === 'past'
+                    ? "complete"
+                    : booking.status
+                    }</td>
                 <td>
                     <div className="booking-detail">{dates}</div>
                     <div className="booking-detail">{booking.venueData.title}</div>
@@ -25,7 +28,10 @@ function Bookings(props){
                     <div className="booking-detail pointer">
                         Print Reservation
                     </div>
-                    <div className="booking-detail pointer">Cancel Confirmation</div>
+                    { props.type === "upcoming"
+                        ? <div className="booking-detail pointer">Cancel Confirmation</div>
+                        : <></>
+                    }
                 </td>
             </tr>
         )
