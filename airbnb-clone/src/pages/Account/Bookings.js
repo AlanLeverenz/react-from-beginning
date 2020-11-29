@@ -5,6 +5,10 @@ import axios from 'axios';
 
 function Bookings(props){
 
+    const cancelBooking = (bid,location) => {
+        console.log(bid,location);
+    }
+
     const bookings = props.bookings.map((booking, i)=>{
         const dates = `{moment(booking.checkIn).format('MMM Do')} - {moment(booking.checkOut).format('MMM Do YYYY')}`;
         return(
@@ -29,7 +33,7 @@ function Bookings(props){
                         Print Reservation
                     </div>
                     { props.type === "upcoming"
-                        ? <div className="booking-detail pointer">Cancel Confirmation</div>
+                        ? <div onClick={()=>cancelBooking(booking.id,booking.venueData.location)} className="booking-detail pointer">Cancel Confirmation</div>
                         : <></>
                     }
                 </td>
