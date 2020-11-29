@@ -38,7 +38,13 @@ class Search extends Component{
             <div className="container-fluid lower-fold">
                 <div className="row">
                     <div className="col s12">
-
+                        <Cities cities={this.state.cities} header="Cities matching your search"/>
+                    </div>
+                    <div className="col s12">
+                        <Activities activities={this.state.activities} header="Activities matching your search"/>
+                    </div>
+                    <div className="col s12">
+                    <Venues venues={this.state.venues} header="Venues matching your search" />
                     </div>
                 </div>
             </div>
