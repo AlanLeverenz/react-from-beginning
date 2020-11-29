@@ -5,8 +5,35 @@ import axios from 'axios';
 
 function Bookings(props){
 
-    const cancelBooking = (bid,location) => {
-        console.log(bid,location);
+    const cancelBooking = async (bid,location) => {
+        // console.log(bid,location);
+        const cancelReservation = await swal({
+            text: `Are you sure you want to cancel your trip ${location}?`,
+            icon: 'warning',
+            buttons: true
+        });
+        if(cancelReservation){
+            console.log(cancelReservation);
+            // console.log("User clicked OK to cancel the reservation.");
+            const url = `${window.apiHost}/reservation/cancel`;
+            const data = {
+                token: props.token,
+                bid,
+            }
+            const resp = await axios.post(url,data);
+            // console.log(resp.data);
+            if(resp.data.msg === "cancelled"){
+                swal({
+                    title: "Cancelled",
+                    icon: "success"
+                })
+            } else {
+                swal({
+                    title: "There was an error cancelling",
+                    icon: 'error'
+                })
+            }
+        }
     }
 
     const bookings = props.bookings.map((booking, i)=>{
