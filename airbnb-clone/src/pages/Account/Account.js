@@ -7,7 +7,7 @@ import moment from 'moment';
 import { Route } from 'react-router-dom'
 import AccountSideBar from './AccountSideBar';
 import Bookings from './Bookings';
-import ChangePassword from './ChangePassword'
+import ChangePassword from './ChangePassword';
 
 class Account extends Component{
 
@@ -44,8 +44,8 @@ class Account extends Component{
 
     render(){
         const { pastBookings, upcomingBookings} = this.state;
-        console.log(pastBookings);
-        console.log(upcomingBookings);
+        // console.log(pastBookings);
+        // console.log(upcomingBookings);
         return(
             <div className="account container-fluid">
                 <AccountSideBar />
@@ -55,7 +55,7 @@ class Account extends Component{
                         <h1>Choose an option on the left!</h1>
                     } />
                         <Route exact path="/account/reservations/confirmed" render={()=>
-                        <Bookings type="upcoming" bookings={upcomingBookings} token={this.props.auth.token} />
+                            <Bookings type="upcoming" bookings={upcomingBookings} token={this.props.auth.token} />
                         } />
                         <Route exact path="/account/reservations/past">
                             <Bookings type="past" bookings={pastBookings} />

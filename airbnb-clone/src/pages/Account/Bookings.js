@@ -59,7 +59,7 @@ function Bookings(props){
                     <div className="booking-detail pointer">
                         Print Reservation
                     </div>
-                    { props.type === "upcoming"
+                    { props.type === "upcoming" && booking.status !== "cancelled"
                         ? <div onClick={()=>cancelBooking(booking.id,booking.venueData.location)} className="booking-detail pointer">Cancel Confirmation</div>
                         : <></>
                     }
