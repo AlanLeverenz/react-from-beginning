@@ -9,6 +9,13 @@ import Venues from '../../utility/Venue/Venues';
 
 class Search extends Component{
 
+    state = {
+        activities: [],
+        cities: [],
+        venues: [],
+        apiResponse: false,
+    }
+
     async componentDidMount(){
         const searchTerm = this.props.match.params.searchTerm;
         console.log(searchTerm);
@@ -17,11 +24,16 @@ class Search extends Component{
         this.setState({
             activities: resp.data.activities,
             cities: resp.data.cities,
-            venues: resp.data.venues
+            venues: resp.data.venues,
+            apiResponse: true,
         })
     }
 
     render(){
+        if(!this.state.apiResponse){
+            return <Spinner />
+        }
+
         return (
             <div className="container-fluid lower-fold">
                 <div className="row">
