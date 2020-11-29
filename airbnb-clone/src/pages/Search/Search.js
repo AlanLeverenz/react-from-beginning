@@ -9,11 +9,18 @@ import Venues from '../../utility/Venue/Venues';
 
 class Search extends Component{
 
-    componentDidMount(){
-
-
+    async componentDidMount(){
+        const searchTerm = this.props.match.params.searchTerm;
+        console.log(searchTerm);
+        const url = `${window.apiHost}/search/${searchTerm}`;
+        const resp = await axios.get(url);
+        this.setState({
+            activities: resp.data.activities,
+            cities: resp.data.cities,
+            venues: resp.data.venues
+        })
     }
-    
+
     render(){
         return (
             <div className="container-fluid lower-fold">
