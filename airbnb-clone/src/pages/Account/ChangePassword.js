@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+
 class ChangePass extends Component{
 
     state = { 
@@ -15,7 +16,7 @@ class ChangePass extends Component{
         const confirmPassword = this.state.confirmPassword;
         if (newPassword !== confirmPassword) {
           swal({
-            title: "Password don't match",
+            title: "Passwords don't match",
             icon: "error",
           });
         } else {
@@ -48,10 +49,10 @@ class ChangePass extends Component{
                     <div className="row">
                         <div className="col s12">
                             <div className="col s6 search-box-form">
-                                <div class="form-label">New Password</div>
-                                <div class="input-field" id="where">
+                                <div className="form-label">New Password</div>
+                                <div className="input-field" id="where">
                                     <input 
-                                        class="browser-default" 
+                                        className="browser-default" 
                                         placeholder="New Password" 
                                         type="password" 
                                         onChange={(e)=>this.setState({newPassword: e.target.value})}
@@ -60,10 +61,10 @@ class ChangePass extends Component{
                             </div>                                
 
                             <div className="col s6 search-box-form">
-                                <div class="form-label">Confirm Password</div>
-                                <div class="input-field" id="where">
+                                <div className="form-label">Confirm Password</div>
+                                <div className="input-field" id="where">
                                     <input 
-                                        class="browser-default" 
+                                        className="browser-default" 
                                         placeholder="Confirm Password" 
                                         type="password" 
                                         onChange={(e)=>this.setState({confirmPassword: e.target.value})}
