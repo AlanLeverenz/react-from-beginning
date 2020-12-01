@@ -1,7 +1,7 @@
-import React, { Component, lazy } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
-// import Spinner from './utility/Spinner/Spinner';
+import Spinner from './utility/Spinner/Spinner';
 // import Home from './pages/Home/Home';
 const Home = lazy(()=>import('./pages/Home/Home'));
 // import NavBar from './utility/NavBar/NavBar';
@@ -23,14 +23,16 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Route path='/' component={NavBar} />
-        <Route exact path='/' component={Home} />
-        <Route exact path='/venue/:vid' component={SingleFullVenue} />
-        <Route exact path='/city/:cityName' component={CityVenues} />
-        <Route exact path="/payment-success/:stripeToken" component={PaymentSuccess} />
-        <Route path="/account" component={Account} />
-        <Route path="/search/:searchTerm" component={Search} />
-        <Route path="/" component={Modal} />
+      <Suspense fallback={<Spinner />}>
+          <Route path='/' component={NavBar} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/venue/:vid' component={SingleFullVenue} />
+          <Route exact path='/city/:cityName' component={CityVenues} />
+          <Route exact path="/payment-success/:stripeToken" component={PaymentSuccess} />
+          <Route path="/account" component={Account} />
+          <Route path="/search/:searchTerm" component={Search} />
+          <Route path="/" component={Modal} />
+        </Suspense>
       </Router>
     );
   }
