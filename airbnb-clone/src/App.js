@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home/Home';
@@ -8,7 +8,8 @@ import Modal from './utility/Modal/Modal';
 import CityVenues from './pages/CityVenues/CityVenues';
 import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import Account from './pages/Account/Account';
-import Search from './pages/Search/Search';
+// import Search from './pages/Search/Search';
+const Search = lazy(()=>import('./pages/Search/Search'));
 
 class App extends Component {
   render() {
