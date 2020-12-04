@@ -1,4 +1,5 @@
 // imperative = mutate state whenever we want to
+// procedural = no assication between data and methods/function
 
 const theDeck = [];
 const playerHand = [];
@@ -33,3 +34,4 @@ playerHand.push(theDeck.shift()); // removes top element
 player2Hand.push(theDeck.shift());
 console.log(theDeck.length);
 console.log(playerHand);
+console.log(player2Hand);
