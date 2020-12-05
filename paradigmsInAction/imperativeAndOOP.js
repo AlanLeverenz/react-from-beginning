@@ -1,3 +1,6 @@
+// imperative = mutate state whenever we want to
+// oop = data and methods are encapsulated
+
 class Deck{
     constructor(){
         this.deck = [];
