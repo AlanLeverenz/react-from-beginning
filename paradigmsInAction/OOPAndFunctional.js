@@ -74,4 +74,4 @@ deckObj.store.setState('deck',shuffleDeck);
 // store.setState('playersHand',playerHandAfterDeal);
 // store.setState('placeInDeck',store.getState('placeInDeck')+1);
 
-// console.log(store.getState('deck'))
+console.log(deckObj.store.getState('deck'))
