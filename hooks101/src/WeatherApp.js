@@ -4,7 +4,9 @@ import CityWeather from './CityWeather';
 
 class WeatherApp extends Component {
 
-        state = {city: 'London'
+        state = {
+            city: 'London',
+            cityNameForWeather: ''
         }
         // constructor() {
         // super();
@@ -17,10 +19,15 @@ class WeatherApp extends Component {
         this.setState({city:e.target.value})
     }
 
+    citysearch = (e)=>{
+        e.preventDefault();
+        this.setState({cityNameForWeather: this.state.city});
+    }
+
     render(){
         return(
             <div className="container">
-                <CityWeather />
+                <CityWeather cityName={this.state.cityNameForWeather} />
                 <div className="row justify-content-center">
                     <form onSubmit={this.citysearch}>
                         <input type="text" value={this.state.city} onChange={this.changeCity} />
