@@ -6,7 +6,7 @@ class WeatherApp extends Component {
 
         state = {
             city: 'London',
-            cityNameForWeather: ''
+            cityNameForWeather: 'London'
         }
         // constructor() {
         // super();
