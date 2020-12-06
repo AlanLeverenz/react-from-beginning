@@ -60,4 +60,6 @@ store.setState('playersHand',playerHandAfterDeal);
 store.setState('placeInDeck',store.getState('placeInDeck')+1);
 
 
-console.log(store.getState('deck'))
+console.log(store.getState('deck'));
+console.log(store.getState('playersHand'));
+console.log(store.getState('placeInDeck'));
