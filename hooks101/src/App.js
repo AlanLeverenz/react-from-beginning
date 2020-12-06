@@ -5,7 +5,13 @@ import './App.css';
 // strict mode means using const or let
 
 function App() {
-  const [counter,setCounter] = useState(0)
+  const [counter,setCounter] = useState(0);
+
+    // [0] or counter = the this.state
+    // [1] or setCounter = this.setState(thing [0])
+    // 0 we pass to useState = the initial value of state
+    // Hooks do not use an object to store state
+    // THIS IS FROSTING! React state works the same as it does with classes
 
     return(
       <div>
