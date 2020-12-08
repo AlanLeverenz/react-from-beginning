@@ -43,5 +43,3 @@ class CityWeather extends Component {
 }
 
 export default CityWeather;
-
-// appid=7d4f2cda5bab002442683b32490d0c00
