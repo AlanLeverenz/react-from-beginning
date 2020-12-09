@@ -16,6 +16,7 @@ function CityWeatherHooks(props){
         // 1. undefined (no value - run every render (componentDidMount + componentDidUpdate))
         // 2. [] --> run on the first render ONLY (componentDidMount)
         // 3. [cityName,cityLocation (...data)] --> run on the first render and anytime a var in the array changes (componentDidMount + componentDidUpdate)
+        // 4.(sort of) - if you return a function, that will run when the component unmounts (componentWillUnmount)
 
 
     useEffect(()=>{
