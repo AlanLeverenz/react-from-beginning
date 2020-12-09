@@ -3,7 +3,6 @@ import axios from 'axios';
 
 class CityWeather extends Component {
 
-
     state = {
         cityData: {},
     }
