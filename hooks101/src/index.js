@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
-import WeatherApp from './WeatherApp';
+// import WeatherApp from './WeatherApp';
+import WeatherAppHooks from './WeatherAppHooks';
 import reportWebVitals from './reportWebVitals';
 
 // ReactDOM.render(
@@ -12,9 +13,16 @@ import reportWebVitals from './reportWebVitals';
 //   document.getElementById('root')
 // );
 
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <WeatherApp />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
 ReactDOM.render(
   <React.StrictMode>
-    <WeatherApp />
+    <WeatherAppHooks />
   </React.StrictMode>,
   document.getElementById('root')
 );

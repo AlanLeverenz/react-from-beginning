@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import CityWeather from './CityWeather';
+import CityWeatherHooks from './CityWeatherHooks';
 
-class WeatherApp extends Component {
+class WeatherAppHooks extends Component {
 
         state = {
             city: 'London',
@@ -21,7 +21,7 @@ class WeatherApp extends Component {
     render(){
         return(
             <div className="container">
-                <CityWeather cityName={this.state.cityNameForWeather} />
+                <CityWeatherHooks cityName={this.state.cityNameForWeather} />
                 <div className="row justify-content-center">
                     <form onSubmit={this.citysearch}>
                         <input type="text" value={this.state.city} onChange={this.changeCity} />
@@ -33,4 +33,4 @@ class WeatherApp extends Component {
     }
 }
 
-export default WeatherApp;
+export default WeatherAppHooks;
