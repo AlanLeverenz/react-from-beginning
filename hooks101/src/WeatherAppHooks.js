@@ -4,7 +4,7 @@ import CityWeatherHooks from './CityWeatherHooks';
 
 function WeatherApp (props) {
 
-        // destructures an array by calling useState, value + setter
+        // destructures an array by calling useState, variable + setter (handler)
         const [  city, changeCity ] = useState("London");
         const [  cityNameForWeather, changeCityNameForWeather ] = useState("London");
 
