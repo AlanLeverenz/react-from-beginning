@@ -11,8 +11,8 @@ function CityWeatherHooks(props){
     // we need to make an ajax/http request to the API
     // we don't have lifecycle methods... so we use useEffect
     // takes 2 args:
-    // 1: a callback that runs...
-    //  2: "when" to run 1
+    //  1: a callback that runs...
+    //  2: "when" to run
         // 1. undefined (no value - run every render (componentDidMount + componentDidUpdate))
         // 2. [] --> run on the first render ONLY (componentDidMount)
         // 3. [cityName,cityLocation (...data)] --> run on the first render and anytime a var in the array changes (componentDidMount + componentDidUpdate)
@@ -25,9 +25,20 @@ function CityWeatherHooks(props){
         const resp = await axios.get(url);
         console.log(resp.data);
         changeCityData(resp.data);
+        // return ()=> { console.log("Component is unmounting")}
         }
         fetchWeather();
     },[props.cityName]);
+
+    // can insert multiple useEffect functions
+
+    useEffect(()=>{
+        console.log("I only run once!");
+    },[]);
+
+    useEffect(()=>{
+        console.log("City data changed!");
+    },[cityData]);
 
     if(!cityData.weather){
         return(<h1>Loading...</h1>)
