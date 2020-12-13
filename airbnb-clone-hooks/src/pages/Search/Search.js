@@ -23,7 +23,7 @@ function Search(props){
             setActivities(resp.data.activities);
             setCities(resp.data.cities);
             setVenues(resp.data.venues);
-            setResponse(resp.data.true);
+            setResponse(true);
         }
         fetchSearchData()
     },[]) // only run this effect on first render (empty bracket), not looking for variables to change.
