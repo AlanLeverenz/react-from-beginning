@@ -1,45 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './SearchBox.css';
 
-class SearchBox extends Component {
-  state = {
-    where: '',
-    checkIn: '',
-    checkOut: '',
-    guests: 0,
-  };
-  // will cause a re-render
-  changeWhere = (e) => {
-    this.setState({ where: e.target.value });
-  };
-  changeCheckIn = (e) => {
-    this.setState({ checkIn: e.target.value });
-  };
-  changeCheckOut = (e) => {
-    this.setState({ checkOut: e.target.value });
-  };
-  changeGuests = (e) => {
-    this.setState({ guests: e.target.value });
-  };
+function SearchBox(props) {
 
-  submitSearch = (e) => {
+    const [ where, changeWhere ] = useState("")
+    const [ checkIn, changeCheckIn ] = useState("")
+    const [ checkOut, changeCheckOut ] = useState("")
+    const [ guests, changeGuests ] = useState(1)
+
+    const submitSearch = (e) => {
     e.preventDefault();
-    this.props.history.push(`/search/${this.state.where}`)
+    props.history.push(`/search/${where}`)
   }
-  render() {
+
     return (
       <div className='home-search-box col m4'>
         <h1>Book unique places to stay and things to do.</h1>
 
-        <form onSubmit={this.submitSearch} className='search-box-form'>
+        <form onSubmit={submitSearch} className='search-box-form'>
           <div className='col m12'>
             <div className='form-label'>Where</div>
             <div className='input-field' id='where'>
               <input
                 className='browser-default'
-                onChange={this.changeWhere}
+                onChange={(e)=>changeWhere(e.target.value)}
                 placeholder='Anywhere'
-                value={this.state.where}
+                value={where}
                 type='text'
               />
             </div>
@@ -50,9 +36,9 @@ class SearchBox extends Component {
             <div className='input-field' id='check-in'>
               <input
                 className='browser-default'
-                onChange={this.changeCheckIn}
+                onChange={(e)=>changeCheckIn(e.target.value)}
                 placeholder='Anywhere'
-                value={this.state.checkIn}
+                value={checkIn}
                 type='date'
               />
             </div>
@@ -63,9 +49,9 @@ class SearchBox extends Component {
             <div className='input-field' id='check-out'>
               <input
                 className='browser-default'
-                onChange={this.changeCheckOut}
+                onChange={(e)=>changeCheckOut(e.target.value)}
                 placeholder='Anywhere'
-                value={this.state.checkOut}
+                value={checkOut}
                 type='date'
               />
             </div>
@@ -76,9 +62,9 @@ class SearchBox extends Component {
             <div className='input-field' id='guests'>
               <input
                 className='browser-default'
-                onChange={this.changeGuests}
+                onChange={(e)=>changeGuests(e.target.value)}
                 placeholder='Anywhere'
-                value={this.state.guests}
+                value={guests}
                 type='number'
               />
             </div>
@@ -96,6 +82,5 @@ class SearchBox extends Component {
       </div>
     );
   }
-}
 
 export default SearchBox;
