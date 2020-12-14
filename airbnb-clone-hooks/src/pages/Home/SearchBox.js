@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SearchBox.css';
+import useControlledInput from '../../customHooks/useControlledInput';
 
 function SearchBox(props) {
 
