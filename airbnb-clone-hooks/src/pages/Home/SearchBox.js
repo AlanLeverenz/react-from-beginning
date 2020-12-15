@@ -4,14 +4,19 @@ import useControlledInput from '../../customHooks/useControlledInput';
 
 function SearchBox(props) {
 
-    const [ where, changeWhere ] = useState("")
-    const [ checkIn, changeCheckIn ] = useState("")
-    const [ checkOut, changeCheckOut ] = useState("")
-    const [ guests, changeGuests ] = useState(1)
+  const where = useControlledInput('')
+  const checkIn =  useControlledInput('')
+  const checkOut =  useControlledInput('')
+  const guests =  useControlledInput(1)
+
+    // const [ where, changeWhere ] = useState("")
+    // const [ checkIn, changeCheckIn ] = useState("")
+    // const [ checkOut, changeCheckOut ] = useState("")
+    // const [ guests, changeGuests ] = useState(1)
 
     const submitSearch = (e) => {
     e.preventDefault();
-    props.history.push(`/search/${where}`)
+    props.history.push(`/search/${where.value}`)
   }
 
     return (
@@ -24,9 +29,8 @@ function SearchBox(props) {
             <div className='input-field' id='where'>
               <input
                 className='browser-default'
-                onChange={(e)=>changeWhere(e.target.value)}
                 placeholder='Anywhere'
-                value={where}
+                {...where}
                 type='text'
               />
             </div>
@@ -37,9 +41,8 @@ function SearchBox(props) {
             <div className='input-field' id='check-in'>
               <input
                 className='browser-default'
-                onChange={(e)=>changeCheckIn(e.target.value)}
                 placeholder='Anywhere'
-                value={checkIn}
+                {...checkIn}
                 type='date'
               />
             </div>
@@ -50,9 +53,8 @@ function SearchBox(props) {
             <div className='input-field' id='check-out'>
               <input
                 className='browser-default'
-                onChange={(e)=>changeCheckOut(e.target.value)}
                 placeholder='Anywhere'
-                value={checkOut}
+                {...checkOut}
                 type='date'
               />
             </div>
@@ -63,9 +65,8 @@ function SearchBox(props) {
             <div className='input-field' id='guests'>
               <input
                 className='browser-default'
-                onChange={(e)=>changeGuests(e.target.value)}
                 placeholder='Anywhere'
-                value={guests}
+                {...guests}
                 type='number'
               />
             </div>
