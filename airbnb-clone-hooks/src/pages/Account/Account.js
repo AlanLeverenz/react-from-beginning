@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Account.css';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
@@ -9,41 +9,39 @@ import AccountSideBar from './AccountSideBar';
 import Bookings from './Bookings';
 import ChangePassword from './ChangePassword';
 
-class Account extends Component{
+function Account(props){
 
-    state = {
-        pastBookings: [],
-        upcomingBookings: [],
-    }
+    const [ pastBookings, setPastBookings ] = useState([]);
+    const [ upcomingBookings, setUpcomingBookings ] = useState([]);
 
-    async componentDidMount(){
+    useEffect(()=>{
         const accountUrl = `${window.apiHost}/users/getBookings`;
         const data = {
-            token: this.props.auth.token,
+            //token: this.props.auth.token,
         }
-        const resp = await axios.post(accountUrl,data);
-        console.log(resp.data);
-        let pastBookings = []
-        let upcomingBookings = [];
-        resp.data.forEach(booking => {
-            const today = moment(); // get today's date so we know past and future
-            const checkOutDate = moment(booking.checkOut);
-            const diffDays = checkOutDate.diff(today,"days");
-            if(diffDays < 0) {
-                pastBookings.push(booking);
-            } else {
-                upcomingBookings.push(booking);
-            }
-        });
 
-        this.setState({
-            pastBookings,
-            upcomingBookings,
-        })
-    }
+        const fetchAccountData = async()=>{
+            const resp = await axios.post(accountUrl,data);
+            console.log(resp.data);
+            let pastBookings = []
+            let upcomingBookings = [];
+            resp.data.forEach(booking => {
+                const today = moment(); // get today's date so we know past and future
+                const checkOutDate = moment(booking.checkOut);
+                const diffDays = checkOutDate.diff(today,"days");
+                if(diffDays < 0) {
+                    pastBookings.push(booking);
+                } else {
+                    upcomingBookings.push(booking);
+                }
+            });
 
-    render(){
-        const { pastBookings, upcomingBookings} = this.state;
+            setPastBookings(pastBookings);
+            setUpcomingBookings(upcomingBookings);
+        };    
+        fetchAccountData();
+        },[]);  // run the first render and never again
+
         // console.log(pastBookings);
         // console.log(upcomingBookings);
         return(
@@ -67,7 +65,6 @@ class Account extends Component{
         )
     }
 
-}
 
 function mapStateToProps(state){
     return{
