@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import './Login.css';
 import { useDispatch } from 'react-redux';
 import openModal from '../../actions/openModal';
@@ -14,19 +14,15 @@ function Login (props) {
     const [ email, changeEmail ] = useState[""];
     const [ password, changePassword ] = useState[""];
 
-    changeEmail = (e)=>this.setState({email:e.target.value})
-    changePassword = (e)=>this.setState({password:e.target.value})
-
-    submitLogin = async(e)=>{
+    const submitLogin = async(e)=>{
         e.preventDefault();
-        console.log(this.state.email);
-        console.log(this.state.password);
-
+        console.log(email);
+        console.log(password);
 
         const url = `${window.apiHost}/users/login`;
         const data = {
-            email: this.state.email,
-            password: this.state.password
+            email: email,
+            password: password
         }
         const resp = await axios.post(url,data);
         const token = resp.data.token;
@@ -51,22 +47,23 @@ function Login (props) {
                 title: "Success!",
                 icon: "success",
               });
-            // we call our register action to update our auth reducer!!
+            // we call our register action to updtae our auth reducer!!
             // props.regAction(resp.data);
             // window.setTimeout(()=>{
                 // dispatch({
-                //     type: "REGISTER_ACTION",
-                //     payload: resp.data,
-                // });
-            // },3000)
+                    // type: "REGISTER_ACTION",
+                    // payload: resp.data,
+                    // });
+                // }, 3000)
             
-            this.props.regAction(resp.data);
+            // this.props.regAction(resp.data);
+            dispatch(regAction(resp.data));
         }
     }
 
     return(
         <div className="login-form">
-            <form onSubmit={this.submitLogin}>
+            <form onSubmit={submitLogin}>
                 <button className="facebook-login">Connect With Facebook</button>
                 <button className="google-login">Connect With Google</button>
                 <div className="login-or center">
