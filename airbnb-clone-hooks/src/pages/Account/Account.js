@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Account.css';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux';
+import { useSelector } from 'react-redux';
+// import { connect } from 'react-redux'
+// import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import moment from 'moment';
 import { Route } from 'react-router-dom'
@@ -9,7 +10,11 @@ import AccountSideBar from './AccountSideBar';
 import Bookings from './Bookings';
 import ChangePassword from './ChangePassword';
 
+// to use a custom hook it has to be used as a component
+
 function Account(props){
+
+    const token = useSelector(state => state.token);
 
     const [ pastBookings, setPastBookings ] = useState([]);
     const [ upcomingBookings, setUpcomingBookings ] = useState([]);
@@ -17,7 +22,7 @@ function Account(props){
     useEffect(()=>{
         const accountUrl = `${window.apiHost}/users/getBookings`;
         const data = {
-            //token: this.props.auth.token,
+            token: token,
         }
 
         const fetchAccountData = async()=>{
@@ -53,7 +58,7 @@ function Account(props){
                         <h1>Choose an option on the left!</h1>
                     } />
                         <Route exact path="/account/reservations/confirmed" render={()=>
-                            <Bookings type="upcoming" bookings={upcomingBookings} token={this.props.auth.token} />
+                            <Bookings type="upcoming" bookings={upcomingBookings} token={token} />
                         } />
                         <Route exact path="/account/reservations/past">
                             <Bookings type="past" bookings={pastBookings} />
@@ -65,11 +70,5 @@ function Account(props){
         )
     }
 
-
-function mapStateToProps(state){
-    return{
-        auth: state.auth,
-    }
-}
-
-export default connect(mapStateToProps)(Account);
+// export default connect(mapStateToProps)(Account);
+export default Account;
