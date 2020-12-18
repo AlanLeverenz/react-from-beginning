@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import swal from 'sweetalert';
 import axios from 'axios';
-import {connect} from 'react-redux';
+import { useSelector } from 'react-redux';
 
-class ChangePass extends Component{
+function ChangePass(props){
 
-    state = { 
-        newPassword: "",
-        confirmPassword: "",
-    }
+    const token = useSelector(state => state.auth.token);
 
-    handleSubmit = async (e) => {
+    const [  newPassword, setNewPassword ] = useState("");
+    const [  confirmPassword, setConfirmPassword ] = useState("");
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const newPassword = this.state.newPassword;
-        const confirmPassword = this.state.confirmPassword;
         if (newPassword !== confirmPassword) {
           swal({
             title: "Passwords don't match",
@@ -21,7 +20,7 @@ class ChangePass extends Component{
           });
         } else {
             const data = {
-                token: this.props.auth.token,
+                token: token,
                 newPassword,
             }
             const url = `${window.apiHost}/users/change-password`;
@@ -41,49 +40,42 @@ class ChangePass extends Component{
         }
         console.log(newPassword);
     };
-    render(){
-        return(
-            <div className="change-pass center">
-                <h1>Change Your Password</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="row">
-                        <div className="col s12">
-                            <div className="col s6 search-box-form">
-                                <div className="form-label">New Password</div>
-                                <div className="input-field" id="where">
-                                    <input 
-                                        className="browser-default" 
-                                        placeholder="New Password" 
-                                        type="password" 
-                                        onChange={(e)=>this.setState({newPassword: e.target.value})}
-                                        value={this.state.newPassword} />
-                                </div>
-                            </div>                                
 
-                            <div className="col s6 search-box-form">
-                                <div className="form-label">Confirm Password</div>
-                                <div className="input-field" id="where">
-                                    <input 
-                                        className="browser-default" 
-                                        placeholder="Confirm Password" 
-                                        type="password" 
-                                        onChange={(e)=>this.setState({confirmPassword: e.target.value})}
-                                        value={this.state.confirmPassword} />
-                                </div>
+    return(
+        <div className="change-pass center">
+            <h1>Change Your Password</h1>
+            <form onSubmit={this.handleSubmit}>
+                <div className="row">
+                    <div className="col s12">
+                        <div className="col s6 search-box-form">
+                            <div className="form-label">New Password</div>
+                            <div className="input-field" id="where">
+                                <input 
+                                    className="browser-default" 
+                                    placeholder="New Password" 
+                                    type="password" 
+                                    onChange={(e)=>setNewPassword(e.target.value)}
+                                    value={newPassword} />
                             </div>
-                        </div> 
-                        <input type="submit" className="btn-large waves-effect waves-light red accent-2" value="submit"/>
-                    </div>
-                </form>
-            </div>
-        )
-    }
+                        </div>                                
+
+                        <div className="col s6 search-box-form">
+                            <div className="form-label">Confirm Password</div>
+                            <div className="input-field" id="where">
+                                <input 
+                                    className="browser-default" 
+                                    placeholder="Confirm Password" 
+                                    type="password" 
+                                    onChange={(e)=>setConfirmPassword(e.target.value)}
+                                    value={confirmPassword} />
+                            </div>
+                        </div>
+                    </div> 
+                    <input type="submit" className="btn-large waves-effect waves-light red accent-2" value="submit"/>
+                </div>
+            </form>
+        </div>
+    )
 }
 
-function mapStateToProps(state){
-    return{
-        auth: state.auth,
-    }
-}
-
-export default connect(mapStateToProps)(ChangePass);
+export default ChangePass;
