@@ -47,7 +47,7 @@ function Login (props) {
                 title: "Success!",
                 icon: "success",
               });
-            // we call our register action to updtae our auth reducer!!
+            // we call our register action to update our auth reducer!!
             // props.regAction(resp.data);
             // window.setTimeout(()=>{
                 // dispatch({
