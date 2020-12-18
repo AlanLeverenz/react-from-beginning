@@ -1,39 +1,36 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CityVenues.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import Spinner from '../../utility/Spinner/Spinner';
 import Venues from '../../utility/Venue/Venues';
 
-class CityVenues extends Component {
+function CityVenues(props) {
 
-    state = {
-        venues: [],
-        header: "",
-    }
+  const [ venues, setVenues ] = useState([]);
+  const [ header, setHeader ] = useState("");
 
-    async componentDidMount() {
-        const cityName = this.props.match.params.cityName;
-        const url = `${window.apiHost}/venues/city/${cityName}`;
-        console.log(url);
-        const resp = await axios.get(url,{cityName});
-        this.setState({
-            venues: resp.data.venues,
-            header: resp.data.header
-        })
-    }
+  useEffect(()=>{
+    const getVenues = async()=>{
+      const cityName = this.props.match.params.cityName;
+      const url = `${window.apiHost}/venues/city/${cityName}`;
+      console.log(url);
+      const resp = await axios.get(url,{cityName});
+      setVenues(resp.data.venues);
+      setHeader(resp.data.header);
+      }
+    getVenues(); 
+  },[])
 
-  render() {
       if(!this.state.header){
           return <Spinner />
       }
     console.log(this.props);
     return (
         <div className="row">
-        <Venues venues={this.state.venues} header={this.state.header} />
+        <Venues venues={venues} header={header} />
       </div>
     )
   }
-}
 
 export default CityVenues;

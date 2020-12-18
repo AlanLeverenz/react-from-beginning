@@ -44,7 +44,7 @@ function ChangePass(props){
     return(
         <div className="change-pass center">
             <h1>Change Your Password</h1>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="row">
                     <div className="col s12">
                         <div className="col s6 search-box-form">
