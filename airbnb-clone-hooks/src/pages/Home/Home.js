@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 import SearchBox from './SearchBox';
 import Spinner from '../../utility/Spinner/Spinner';
@@ -7,104 +7,89 @@ import Cities from '../../utility/City/Cities';
 import Activities from '../../utility/Activity/Activities';
 import Venues from '../../utility/Venue/Venues';
 
-class Home extends Component {
-  state = {
-    cities: [],
-    europeCities: {},
-    asiaCities: {},
-    exoticCities: {},
-    activities: [],
-    recVenues: {}
-  };
+function Home(props){
 
-  async componentDidMount() {
+  const [ cities, setRecCities ] = useState([])
+  const [ europeCities, setEuropeCities ] = useState({})
+  const [ asiaCities, setAsiaCities ] = useState({})
+  const [ exoticCities, setExoticCities ] = useState({})
+  const [ activities, setActivities ] = useState({})
+  const [ recVenues, setRecVenues ] = useState({})
+
+  useEffect(()=>{
     const citiesUrl = `${window.apiHost}/cities/recommended`;
     const europeCitiesUrl = `${window.apiHost}/cities/europe`;
     const asiaCitiesUrl = `${window.apiHost}/cities/asia`;
     const exoticCitiesUrl = `${window.apiHost}/cities/exotic`;
 
     const citiesPromises = [];
+    async function getData(){
+      citiesPromises.push(axios.get(citiesUrl));
+      citiesPromises.push(axios.get(europeCitiesUrl));
+      citiesPromises.push(axios.get(asiaCitiesUrl));
+      citiesPromises.push(axios.get(exoticCitiesUrl));
 
-    citiesPromises.push(axios.get(citiesUrl));
-    citiesPromises.push(axios.get(europeCitiesUrl));
-    citiesPromises.push(axios.get(asiaCitiesUrl));
-    citiesPromises.push(axios.get(exoticCitiesUrl));
+      const resp = await Promise.all(citiesPromises);
+      setRecCities(resp[0].data)
+      setEuropeCities(resp[1].data)
+      setAsiaCities(resp[2].data)
+      setExoticCities(resp[3].data)
 
-    Promise.all(citiesPromises).then((data)=>{
-        const recommendedCities = data[0].data;
-        const europeCities = data[1].data;
-        const asiaCities = data[2].data;
-        const exoticCities = data[3].data;
-        console.log(exoticCities);
-        this.setState({
-          cities: recommendedCities,
-          europeCities,
-          asiaCities,
-          exoticCities
-        })
-    })
+      const activitiesUrl = `${window.apiHost}/activities/today`
+      const activities = await axios(activitiesUrl);
+      setActivities(activities.data);
 
-    const activitiesUrl = `${window.apiHost}/activities/today`
-    const activities = await axios(activitiesUrl);
-    console.log(activities.data)
-    this.setState({
-      activities: activities.data,
-    })
+      const recVenuesUrl = `${window.apiHost}/venues/recommended`;
+      const venues = await axios(recVenuesUrl);
+      setRecVenues(venues.data);
+    }
+    getData();
+  },[])
 
-    const recVenuesUrl = `${window.apiHost}/venues/recommended`;
-    const venues = await axios(recVenuesUrl);
-    this.setState({
-        recVenues: venues.data,
-    })
-
-  }
-
-  render() {
-    // console.log(this.state.activities);
-    if ((this.state.cities.length === 0) || (!this.state.recVenues.venues)) {
+    // console.log(activities);
+    if ((cities.length === 0) || (!recVenues.venues)) {
       return <Spinner />;
     }
 
-    return (<>
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='home col s12'>
-              <div className='upper-fold'>
-                <SearchBox history={this.props.history} />
-              </div>
+  return (<>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='home col s12'>
+            <div className='upper-fold'>
+              <SearchBox history={props.history} />
             </div>
           </div>
         </div>
-        <div className="container-fluid lower-fold">
-          <div className="row">
-            <div className="col s12">
-              <Cities cities={this.state.cities} header="Recommended Cities For You"/>
-            </div>
+      </div>
+      <div className="container-fluid lower-fold">
+        <div className="row">
+          <div className="col s12">
+            <Cities cities={cities} header="Recommended Cities For You"/>
+          </div>
 
-            <div className="col s12">
-              <Activities activities={this.state.activities} header="Today in your area"/>
-            </div>
+          <div className="col s12">
+            <Activities activities={activities} header="Today in your area"/>
+          </div>
 
-            <div className="col s12">
-              <Cities cities={this.state.europeCities.cities} header={this.state.europeCities.header}/>
-            </div>
+          <div className="col s12">
+            <Cities cities={europeCities.cities} header={europeCities.header}/>
+          </div>
 
-            <div className="col s12">
-              <Venues venues={this.state.recVenues.venues} header={this.state.recVenues.header} />
-            </div>
+          <div className="col s12">
+            <Venues venues={recVenues.venues} header={recVenues.header} />
+          </div>
 
-            <div className="col s12">
-              <Cities cities={this.state.asiaCities.cities} header={this.state.asiaCities.header}/>
-            </div>
+          <div className="col s12">
+            <Cities cities={asiaCities.cities} header={asiaCities.header}/>
+          </div>
 
-            <div className="col s12">
-              <Cities cities={this.state.exoticCities.cities} header={this.state.exoticCities.header}/>
-            </div>
+          <div className="col s12">
+            <Cities cities={exoticCities.cities} header={exoticCities.header}/>
           </div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default Home;
