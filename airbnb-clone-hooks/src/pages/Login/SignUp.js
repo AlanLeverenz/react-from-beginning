@@ -1,57 +1,49 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.css';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { useSelector, useDispatch} from 'react-redux';
 import openModal from '../../actions/openModal';
 import regAction from '../../actions/regAction';
 import Login from './Login';
 import axios from 'axios';
 import swal from 'sweetalert';
 
-class SignUp extends Component {
+function SignUp(props) {
 
-    constructor() {
-        super();
-        this.state = {
-            lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>,
-            email: "",
-            password: ""
-        }
+    const dispatch = useDispatch();
+
+    const [ lowerPartOfForm, setLowerPartOfForm ] = useState("")
+    const [ email, changeEmail ] = useState("")
+    const [ password, changePassword ] = useState("")
+
+    useEffect(()=> {
+        setLowerPartOfForm(
+            <button type="button" onClick={showInputs} className="sign-up-button">Sign up with email</button>
+        )
+    },[])
+
+    const showInputs = (e) => {
+        setLowerPartOfForm(
+            <SignUpInputFields changeEmail={changeEmail(e.target.value)} changePassword={changePassword(e.target.value)}/>
+        )
     }
 
-    // componentDidMount(){
-    //     this.setState({
-    //         lowerPartOfForm: <button type="button" onClick={this.showInputs} className="sign-up-button">Sign up with email</button>
-    //     })
-    // }
-
-    changeEmail = (e)=>this.setState({email:e.target.value});
-    changePassword = (e)=>this.setState({password:e.target.value});
-
-
-    showInputs = () => {
-        this.setState({
-            lowerPartOfForm: <SignUpInputFields changeEmail={this.changeEmail} changePassword={this.changePassword}/>
-        })
-    }
-
-    submitLogin = async (e) =>{
+    const submitLogin = async (e) =>{
         e.preventDefault();
-        // console.log(this.state.email);
-        // console.log(this.state.password);
         const url = `${window.apiHost}/users/signup`;
         const data = {
-            email: this.state.email,
-            password: this.state.password
+            email: email,
+            password: password
         }
+        console.log(data);
         const resp = await axios.post(url,data);
+        console.log(resp.data);
         const token = resp.data.token;
-        console.log(token);
 
         // resp.data.msg could be:
         // - invalidData
         // - userExists
         // - userAdded
+
         if(resp.data.msg === "userExists") {
             swal({
                 title: "Email Exists",
@@ -68,77 +60,53 @@ class SignUp extends Component {
             swal({
                 title: "Success!",
                 icon: "success",
-            })
-            // we call our register action to update our auth reducer (state)
-            this.props.regAction(resp.data)
+            });
+            // we dispatch our register action to update our auth reducer (state)
         }
-
-        // const url2 = `${window.apiHost}/users/token-check`;
-        // const resp2 = await axios.post(url2,{token});
-        // console.log(resp2.data);
-
+        dispatch(regAction(resp.data));
     }
 
-    render(){
-
-        console.log(this.props.auth);
-
-        return(
-            <div className="login-form">
-                <form onSubmit={this.submitLogin}>
-                    <button className="facebook-login">Connect With Facebook</button>
-                    <button className="google-login">Connect With Google</button>
-                    <div className="login-or center">
-                        <span>or</span>
-                        <div className="or-divider"></div>
-                    </div>
-                    {this.state.lowerPartOfForm}
-                    <div className="divider"></div>
-                    <div>Don't have an account? <span className="pointer" onClick={()=>{this.props.openModal('open', <Login />)}}>Log in</span>
-                    </div>
-                </form>
-            </div>
-
-        )
-    }
+    return(
+        <div className="login-form">
+            <form onSubmit={submitLogin}>
+                <button className="facebook-login">Connect With Facebook</button>
+                <button className="google-login">Connect With Google</button>
+                <div className="login-or center">
+                    <span>or</span>
+                    <div className="or-divider"></div>
+                </div>
+                {lowerPartOfForm}
+                <div className="divider"></div>
+                <div>Already have an account? <span className="pointer" onClick={()=>dispatch(openModal('open', <Login />))}>Log in</span>
+                </div>
+            </form>
+        </div>
+    )
 }
-
-function mapStateToProps(state){
-    return{
-        auth: state.auth,
-    }
-}
-
-function mapDispatchToProps(dispatcher){
-    return bindActionCreators({
-      openModal: openModal,
-      regAction: regAction
-    }, dispatcher)
-  }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+  export default SignUp;
 
-  // inline component const 
-  const SignUpInputFields = (props) => {
-      return(
-          <div className="sign-up-wrapper">
-            <div className="col m12">
-                <div className="input-field" id="email">
-                    <div className="form-label">Email
-                    <input type="text" placeholder="Email" onChange={props.changeEmail} />
-                    </div>
+// inline component const 
+const SignUpInputFields = (props) => {
+    return(
+        <div className="sign-up-wrapper">
+        <div className="col m12">
+            <div className="input-field" id="email">
+                <div className="form-label">Email
+                <input type="text" placeholder="Email" onChange={props.changeEmail} />
                 </div>
             </div>
-            <div className="col m12">
-                <div className="input-field" id="password">
-                    <div className="form-label">Password
-                    <input type="password" placeholder="Password" onChange={props.changePassword} />
-                    </div>
+        </div>
+        <div className="col m12">
+            <div className="input-field" id="password">
+                <div className="form-label">Password
+                <input type="password" placeholder="Password" onChange={props.changePassword} />
                 </div>
             </div>
-            <div className="col m12">
-                <button type="submit" className="btn red accent-2">Sign Up</button>
-            </div>
-          </div>
-      )
-  }
+        </div>
+        <div className="col m12">
+            <button type="submit" className="btn red accent-2">Sign Up</button>
+        </div>
+        </div>
+    )
+}
