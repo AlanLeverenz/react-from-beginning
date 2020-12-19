@@ -12,7 +12,7 @@ function CityVenues(props) {
 
   useEffect(()=>{
     const getVenues = async()=>{
-      const cityName = this.props.match.params.cityName;
+      const cityName = props.match.params.cityName;
       const url = `${window.apiHost}/venues/city/${cityName}`;
       console.log(url);
       const resp = await axios.get(url,{cityName});
@@ -22,10 +22,10 @@ function CityVenues(props) {
     getVenues(); 
   },[])
 
-      if(!this.state.header){
+      if(!header){
           return <Spinner />
       }
-    console.log(this.props);
+    console.log(props);
     return (
         <div className="row">
         <Venues venues={venues} header={header} />
