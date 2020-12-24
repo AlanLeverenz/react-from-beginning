@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ThemeContext from './contexts/themeContext';
 import MainContainer from './MainContainer'
 

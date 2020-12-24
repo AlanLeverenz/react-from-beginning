@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
-import ThemeContext from './contexts/themeContext';
+import React from 'react';
+import InnerContainer from './InnerContainer';
 
 function MainContainer(props){
-    const theme = useContext(ThemeContext);
-    return <h1>{theme}</h1>
+    return <InnerContainer />
 }
 
 export default MainContainer;
