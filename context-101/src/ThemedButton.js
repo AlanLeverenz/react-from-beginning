@@ -11,7 +11,7 @@ import ThemeContext from './contexts/themeContext';
 function ThemedButton(props){
     return(
         <ThemeContext.Consumer>
-            {(theme)=><h1>{theme}</h1>}
+            {(themeContext)=><h1>{themeContext.theme}</h1>}
         </ThemeContext.Consumer>
     )
 }

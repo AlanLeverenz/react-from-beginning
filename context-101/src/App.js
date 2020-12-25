@@ -11,8 +11,9 @@ function App() {
   const [ theme, setTheme ] = useState("Blue");
   console.log(ThemeContext);
 
+  // pass setTheme so child components can modify theme
   return (
-    <ThemeContext.Provider value={theme}>
+    <ThemeContext.Provider value={{theme,setTheme}}>
       <h1>App component</h1>
       <button onClick={(e)=>setTheme(theme === "Blue" ? "Red" : "Blue")}>
         {theme === "Blue" ? "Switch to Red" : "Switch to Blue"}
