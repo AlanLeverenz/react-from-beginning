@@ -9,6 +9,7 @@ function App() {
   // console.log(theme);
 
   const [ theme, setTheme ] = useState("Blue");
+  console.log(ThemeContext);
 
   return (
     <ThemeContext.Provider value={theme}>

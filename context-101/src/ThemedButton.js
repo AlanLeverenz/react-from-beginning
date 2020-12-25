@@ -1,9 +1,19 @@
 import React, { useContext } from 'react';
 import ThemeContext from './contexts/themeContext';
 
+// using useContext hook
+// function ThemedButton(props){
+//     const theme = useContext(ThemeContext);
+//     return <h1>{theme}</h1>
+// }
+
+// using Consumer (return a function with JSX and callback)
 function ThemedButton(props){
-    const theme = useContext(ThemeContext);
-    return <h1>{theme}</h1>
+    return(
+        <ThemeContext.Consumer>
+            {(theme)=><h1>{theme}</h1>}
+        </ThemeContext.Consumer>
+    )
 }
 
 export default ThemedButton;
