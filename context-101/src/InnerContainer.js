@@ -1,4 +1,4 @@
-import React, { useContext, useCallBack } from 'react';
+import React, { useContext } from 'react';
 import ThemedButton from './ThemedButton';
 import ThemeContext from './contexts/themeContext';
 
