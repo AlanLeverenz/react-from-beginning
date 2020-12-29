@@ -1,5 +1,7 @@
 // Supplemental 
 
+// use const unless the variable needs to be redefined.
+
 // Using var, which exists outside the statement
 for (var i = 0; i < 10; i++) {
   console.log(i)
